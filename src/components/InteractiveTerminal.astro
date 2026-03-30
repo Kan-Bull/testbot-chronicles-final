@@ -85,7 +85,7 @@
               placeholder="Type a command or click suggestions above..."
               autocomplete="off"
               spellcheck="false"
-            />
+            /><span class="block-cursor"></span>
           </div>
 
           <!-- Auto-suggestions dropdown -->
@@ -874,11 +874,28 @@
 
 <style>
   #terminal-input {
-    caret-color: #4cd7f6;
+    caret-color: transparent;
   }
 
   #terminal-input:focus {
     outline: none;
+  }
+
+  /* Block cursor effect */
+  #terminal-input:focus + .block-cursor,
+  .block-cursor {
+    display: inline-block;
+    width: 10px;
+    height: 1.2em;
+    background-color: #4cd7f6;
+    animation: block-blink 1s step-end infinite;
+    vertical-align: text-bottom;
+    margin-left: 2px;
+  }
+
+  @keyframes block-blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
   }
 
   /* Terminal output color classes used by JS */
