@@ -529,24 +529,27 @@
 
       if (item.type === 'separator') {
         el.className = 'border-t border-secondary/20 my-3';
-      } else {
-        el.className = `text-${item.className} mb-1`;
-        el.innerHTML = item.text;
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(4px)';
-        el.style.transition = 'opacity 0.15s ease, transform 0.15s ease';
+        this.content.appendChild(el);
+        this.content.scrollTop = this.content.scrollHeight;
+        setTimeout(() => this.drainQueue(), 60);
+        return;
       }
 
+      el.className = `text-${item.className} mb-1`;
+      el.innerHTML = item.text;
+      el.style.opacity = '0';
       this.content.appendChild(el);
       this.content.scrollTop = this.content.scrollHeight;
 
-      // Trigger the fade-in
+      // Pop in after a frame
       requestAnimationFrame(() => {
+        el.style.transition = 'opacity 0.12s ease';
         el.style.opacity = '1';
-        el.style.transform = 'translateY(0)';
       });
 
-      setTimeout(() => this.drainQueue(), 40);
+      // Wait before showing next line
+      const delay = item.text === '' ? 30 : 120;
+      setTimeout(() => this.drainQueue(), delay);
     }
 
     scrollToBottom() {
