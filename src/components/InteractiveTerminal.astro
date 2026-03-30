@@ -109,6 +109,8 @@
       this.commandHistory = [];
       this.historyIndex = -1;
       this.showingSuggestions = false;
+      this.outputQueue = [];
+      this.queueRunning = false;
       
       // Store the initial content to restore on clear
       this.initialContent = this.content.innerHTML;
@@ -502,18 +504,51 @@
     }
     
     addOutput(text, className = 'terminal-gray') {
-      const div = document.createElement('div');
-      div.className = `text-${className} mb-1`;
-      div.innerHTML = text;
-      this.content.appendChild(div);
+      this.outputQueue.push({ type: 'line', text, className });
+      this.processQueue();
     }
-    
+
     addSeparator() {
-      const separator = document.createElement('div');
-      separator.className = 'border-t border-terminal-green/20 my-3';
-      this.content.appendChild(separator);
+      this.outputQueue.push({ type: 'separator' });
+      this.processQueue();
     }
-    
+
+    processQueue() {
+      if (this.queueRunning) return;
+      this.queueRunning = true;
+      this.drainQueue();
+    }
+
+    drainQueue() {
+      if (this.outputQueue.length === 0) {
+        this.queueRunning = false;
+        return;
+      }
+      const item = this.outputQueue.shift();
+      const el = document.createElement('div');
+
+      if (item.type === 'separator') {
+        el.className = 'border-t border-secondary/20 my-3';
+      } else {
+        el.className = `text-${item.className} mb-1`;
+        el.innerHTML = item.text;
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(4px)';
+        el.style.transition = 'opacity 0.15s ease, transform 0.15s ease';
+      }
+
+      this.content.appendChild(el);
+      this.content.scrollTop = this.content.scrollHeight;
+
+      // Trigger the fade-in
+      requestAnimationFrame(() => {
+        el.style.opacity = '1';
+        el.style.transform = 'translateY(0)';
+      });
+
+      setTimeout(() => this.drainQueue(), 40);
+    }
+
     scrollToBottom() {
       setTimeout(() => {
         this.content.scrollTop = this.content.scrollHeight;
