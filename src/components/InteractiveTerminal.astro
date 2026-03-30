@@ -2,97 +2,100 @@
 // Interactive Terminal Component
 ---
 
-<div class="w-full max-w-4xl mx-auto mb-8 px-4 sm:px-6 lg:px-8" id="terminal-container">
-  <!-- Terminal Header -->
-  <div class="bg-terminal-bg rounded-t-lg p-3 flex items-center justify-between">
-    <div class="flex items-center space-x-2">
-      <div id="close-btn" class="w-3 h-3 bg-red-500 rounded-full hover:bg-red-400 cursor-pointer transition" title="Close Terminal"></div>
-      <div id="minimize-btn" class="w-3 h-3 bg-yellow-500 rounded-full hover:bg-yellow-400 cursor-pointer transition" title="Minimize Terminal"></div>
-      <div id="maximize-btn" class="w-3 h-3 bg-green-500 rounded-full hover:bg-green-400 cursor-pointer transition" title="Maximize Terminal"></div>
-      <span class="text-terminal-gray text-sm ml-4 font-mono">terminal@testbot-chronicles</span>
-    </div>
-    <div class="flex items-center space-x-2">
-      <button id="font-smaller" class="text-terminal-gray hover:text-white text-xs font-mono px-2 py-1 hover:bg-white/10 rounded transition" title="Decrease Font Size">A-</button>
-      <button id="font-bigger" class="text-terminal-gray hover:text-white text-xs font-mono px-2 py-1 hover:bg-white/10 rounded transition" title="Increase Font Size">A+</button>
-      <img src="/images/brand/titusLogo.png" alt="Titus Logo" class="h-6 w-auto opacity-60" />
-    </div>
-  </div>
-  
-  <!-- Terminal Body -->
-  <div class="bg-terminal-bg/40 backdrop-blur-xl rounded-b-lg p-3 sm:p-4 lg:p-6 text-left font-mono text-xs sm:text-sm h-[400px] sm:h-[450px] lg:h-[500px] relative overflow-hidden flex flex-col">
-    <!-- Scrollable content area -->
-    <div id="terminal-content" class="flex-1 overflow-y-auto pr-2" style="scrollbar-width: thin; scrollbar-color: #39d353 transparent;">
-      <div class="text-terminal-green mb-2">
-        <span class="text-terminal-orange">Welcome to TestBot Terminal v2.1.0</span>
+<div id="terminal-container" class="relative group">
+  <div class="glass-panel border-ghost rounded-xl p-1 overflow-hidden glow-cyan group-hover:border-ghost-active transition-all duration-300">
+    <!-- Terminal Header -->
+    <div class="bg-surface-container-low/80 border-b border-white/5 rounded-t-lg p-3 flex items-center justify-between">
+      <div class="flex items-center space-x-2">
+        <div id="close-btn" class="w-3 h-3 bg-[#FF5F56] rounded-full cursor-pointer transition" title="Close Terminal"></div>
+        <div id="minimize-btn" class="w-3 h-3 bg-[#FFBD2E] rounded-full cursor-pointer transition" title="Minimize Terminal"></div>
+        <div id="maximize-btn" class="w-3 h-3 bg-[#27C93F] rounded-full cursor-pointer transition" title="Maximize Terminal"></div>
+        <span class="text-[11px] font-mono text-on-surface-variant font-medium ml-4">titus-automation — zsh</span>
       </div>
-      <div class="text-terminal-gray mb-3">
-        <span class="text-terminal-blue">New to terminals?</span> No problem! Click the suggestions below or type commands.
+      <div class="flex items-center space-x-2">
+        <button id="font-smaller" class="text-[10px] font-mono text-on-surface-variant hover:text-secondary transition-colors px-2 py-1" title="Decrease Font Size">A-</button>
+        <button id="font-bigger" class="text-[10px] font-mono text-on-surface-variant hover:text-secondary transition-colors px-2 py-1" title="Increase Font Size">A+</button>
       </div>
-      
-      <!-- Quick Command Buttons -->
-      <div class="mb-4 space-y-2">
-        <!-- First row -->
-        <div class="flex flex-wrap gap-1 sm:gap-2">
-          <button class="terminal-button" id="btn-whoami">
-            [whoami] About Me
-          </button>
-          <button class="terminal-button" id="btn-skills">
-            [skills] My Skills
-          </button>
-          <button class="terminal-button" id="btn-contact">
-            [contact] Contact
-          </button>
-          <button class="terminal-button" id="btn-projects">
-            [projects] Projects
-          </button>
-          <button class="terminal-button" id="btn-hire-me">
-            [hire] Hire Me
-          </button>
+    </div>
+
+    <!-- Terminal Body -->
+    <div id="terminal-body" class="bg-slate-950 rounded-lg overflow-hidden border border-white/5">
+      <div class="p-6 font-mono text-[13px] leading-relaxed h-[320px] lg:h-[400px] relative overflow-hidden flex flex-col">
+        <!-- Scrollable content area -->
+        <div id="terminal-content" class="flex-1 overflow-y-auto pr-2" style="scrollbar-width: thin; scrollbar-color: #4cd7f6 transparent;">
+          <div class="mb-2">
+            <span class="text-tertiary">Welcome to TestBot Terminal v2.1.0</span>
+          </div>
+          <div class="text-on-surface-variant mb-3">
+            <span class="text-secondary">New to terminals?</span> No problem! Click the suggestions below or type commands.
+          </div>
+
+          <!-- Quick Command Buttons -->
+          <div class="mb-4 space-y-2">
+            <!-- First row -->
+            <div class="flex flex-wrap gap-1 sm:gap-2">
+              <button class="px-3 py-1.5 rounded-lg bg-surface-container-high/80 border border-outline-variant/20 hover:border-secondary/40 text-[10px] uppercase tracking-widest font-bold font-mono text-on-surface-variant hover:text-secondary transition-all hover:scale-105" id="btn-whoami">
+                [whoami] About Me
+              </button>
+              <button class="px-3 py-1.5 rounded-lg bg-surface-container-high/80 border border-outline-variant/20 hover:border-secondary/40 text-[10px] uppercase tracking-widest font-bold font-mono text-on-surface-variant hover:text-secondary transition-all hover:scale-105" id="btn-skills">
+                [skills] My Skills
+              </button>
+              <button class="px-3 py-1.5 rounded-lg bg-surface-container-high/80 border border-outline-variant/20 hover:border-secondary/40 text-[10px] uppercase tracking-widest font-bold font-mono text-on-surface-variant hover:text-secondary transition-all hover:scale-105" id="btn-contact">
+                [contact] Contact
+              </button>
+              <button class="px-3 py-1.5 rounded-lg bg-surface-container-high/80 border border-outline-variant/20 hover:border-secondary/40 text-[10px] uppercase tracking-widest font-bold font-mono text-on-surface-variant hover:text-secondary transition-all hover:scale-105" id="btn-projects">
+                [projects] Projects
+              </button>
+              <button class="px-3 py-1.5 rounded-lg bg-surface-container-high/80 border border-outline-variant/20 hover:border-secondary/40 text-[10px] uppercase tracking-widest font-bold font-mono text-on-surface-variant hover:text-secondary transition-all hover:scale-105" id="btn-hire-me">
+                [hire] Hire Me
+              </button>
+            </div>
+            <!-- Second row -->
+            <div class="flex flex-wrap gap-1 sm:gap-2">
+              <button class="px-3 py-1.5 rounded-lg bg-surface-container-high/80 border border-outline-variant/20 hover:border-secondary/40 text-[10px] uppercase tracking-widest font-bold font-mono text-on-surface-variant hover:text-secondary transition-all hover:scale-105" id="btn-experience">
+                [experience] Work History
+              </button>
+              <button class="px-3 py-1.5 rounded-lg bg-surface-container-high/80 border border-outline-variant/20 hover:border-secondary/40 text-[10px] uppercase tracking-widest font-bold font-mono text-on-surface-variant hover:text-secondary transition-all hover:scale-105" id="btn-blog">
+                [blog] TestBot Chronicles
+              </button>
+              <button class="px-3 py-1.5 rounded-lg bg-surface-container-high/80 border border-outline-variant/20 hover:border-secondary/40 text-[10px] uppercase tracking-widest font-bold font-mono text-on-surface-variant hover:text-secondary transition-all hover:scale-105" id="btn-logo">
+                [logo] ASCII Art
+              </button>
+              <button class="px-3 py-1.5 rounded-lg bg-surface-container-high/80 border border-outline-variant/20 hover:border-secondary/40 text-[10px] uppercase tracking-widest font-bold font-mono text-on-surface-variant hover:text-secondary transition-all hover:scale-105" id="btn-help">
+                [help] All Commands
+              </button>
+            </div>
+          </div>
+
+          <div class="text-on-surface-variant mb-4 text-xs">
+            <span class="text-secondary">tip:</span> Use Tab for auto-complete, ↑↓ arrows for history
+          </div>
         </div>
-        <!-- Second row -->
-        <div class="flex flex-wrap gap-1 sm:gap-2">
-          <button class="terminal-button" id="btn-experience">
-            [experience] Work History
-          </button>
-          <button class="terminal-button" id="btn-blog">
-            [blog] TestBot Chronicles
-          </button>
-          <button class="terminal-button" id="btn-logo">
-            [logo] ASCII Art
-          </button>
-          <button class="terminal-button" id="btn-help">
-            [help] All Commands
-          </button>
+
+        <!-- Fixed command line at bottom -->
+        <div class="relative mt-4 border-t border-secondary/20 pt-4">
+          <div class="flex items-center">
+            <span class="text-secondary mr-2">titus-automation $</span>
+            <input
+              type="text"
+              id="terminal-input"
+              class="bg-transparent text-on-surface outline-none flex-1 font-mono"
+              placeholder="Type a command or click suggestions above..."
+              autocomplete="off"
+              spellcheck="false"
+            />
+            <span class="text-secondary cursor-blink ml-1">|</span>
+          </div>
+
+          <!-- Auto-suggestions dropdown -->
+          <div id="suggestions" class="absolute bottom-full left-0 right-0 bg-surface-container-lowest border border-secondary/30 rounded-md hidden z-10 max-h-32 overflow-y-auto mb-2">
+          </div>
         </div>
-      </div>
-      
-      <div class="text-terminal-gray mb-4 text-xs">
-        <span class="text-terminal-blue">tip:</span> Use Tab for auto-complete, ↑↓ arrows for history
-      </div>
-    </div>
-    
-    <!-- Fixed command line at bottom -->
-    <div class="relative mt-4 border-t border-terminal-green/20 pt-4">
-      <div class="flex items-center">
-        <span class="text-terminal-green mr-2">titus@consulting:~$</span>
-        <input 
-          type="text" 
-          id="terminal-input" 
-          class="bg-transparent text-terminal-gray outline-none flex-1 font-mono" 
-          placeholder="Type a command or click suggestions above..."
-          autocomplete="off"
-          spellcheck="false"
-        />
-        <span class="text-terminal-green cursor-blink ml-1">|</span>
-      </div>
-      
-      <!-- Auto-suggestions dropdown -->
-      <div id="suggestions" class="absolute bottom-full left-0 right-0 bg-terminal-bg border border-terminal-green/30 rounded-md hidden z-10 max-h-32 overflow-y-auto mb-2">
+
+        <!-- Particles effect -->
+        <div id="particles" class="absolute inset-0 pointer-events-none"></div>
       </div>
     </div>
-    
-    <!-- Particles effect -->
-    <div id="particles" class="absolute inset-0 pointer-events-none"></div>
   </div>
 </div>
 
@@ -171,7 +174,7 @@
       
       // Focus input when clicking anywhere in terminal
       document.addEventListener('click', (e) => {
-        if (e.target.closest('.bg-terminal-bg\\/40')) {
+        if (e.target.closest('#terminal-body')) {
           this.focusInput();
         }
       });
@@ -204,7 +207,7 @@
     
     setupWindowControls() {
       const terminal = document.getElementById('terminal-container');
-      const terminalBody = document.querySelector('.bg-terminal-bg\\/40');
+      const terminalBody = document.getElementById('terminal-body');
       
       // Close button (red) - minimizes terminal
       const closeBtn = document.getElementById('close-btn');
@@ -284,7 +287,7 @@
     }
     
     setupFontControls() {
-      const terminalBody = document.querySelector('.bg-terminal-bg\\/40');
+      const terminalBody = document.getElementById('terminal-body');
       let currentFontSize = 14; // Default font size in pixels
       
       // Font size decrease button
@@ -817,80 +820,56 @@
 
 <style>
   #terminal-input {
-    caret-color: #39d353;
+    caret-color: #4cd7f6;
   }
-  
+
   #terminal-input:focus {
     outline: none;
   }
-  
-  .terminal-button {
-    background-color: rgba(57, 211, 83, 0.1);
-    border: 1px solid rgba(57, 211, 83, 0.3);
-    color: #39d353;
-    font-size: 0.625rem;
-    padding: 0.25rem 0.5rem;
-    border-radius: 0.375rem;
-    transition: all 0.2s;
-    font-family: monospace;
-  }
-  
-  @media (min-width: 640px) {
-    .terminal-button {
-      font-size: 0.75rem;
-      padding: 0.375rem 0.75rem;
-    }
-  }
-  
-  .terminal-button:hover {
-    background-color: rgba(57, 211, 83, 0.2);
-    border-color: rgba(57, 211, 83, 0.5);
-    transform: scale(1.05);
-    box-shadow: 0 10px 15px -3px rgba(57, 211, 83, 0.1);
-  }
-  
-  .text-terminal-green { color: #39d353; }
-  .text-terminal-blue { color: #58a6ff; }
-  .text-terminal-purple { color: #a371f7; }
-  .text-terminal-orange { color: #f78166; }
-  .text-terminal-gray { color: #8b949e; }
-  
+
+  /* Terminal output color classes used by JS */
+  .text-terminal-green { color: #22c55e; }
+  .text-terminal-blue { color: #4cd7f6; }
+  .text-terminal-purple { color: #fbabff; }
+  .text-terminal-orange { color: #fb923c; }
+  .text-terminal-gray { color: #c6c6cd; }
+
   /* Custom scrollbar for terminal content */
   #terminal-content::-webkit-scrollbar {
-    width: 8px;
+    width: 6px;
   }
-  
+
   #terminal-content::-webkit-scrollbar-track {
-    background: rgba(139, 148, 158, 0.1);
+    background: rgba(76, 215, 246, 0.05);
     border-radius: 4px;
   }
-  
+
   #terminal-content::-webkit-scrollbar-thumb {
-    background: #39d353;
+    background: rgba(76, 215, 246, 0.3);
     border-radius: 4px;
-    opacity: 0.7;
   }
-  
+
   #terminal-content::-webkit-scrollbar-thumb:hover {
-    background: #2ebb47;
+    background: rgba(76, 215, 246, 0.5);
   }
-  
+
   /* Prominent attention-grabbing cursor blink */
   .cursor-blink {
     animation: cursor-blink 1s ease-in-out infinite;
-    filter: drop-shadow(0 0 5px #39d353);
+    filter: drop-shadow(0 0 5px #4cd7f6);
+    color: #4cd7f6;
   }
-  
+
   @keyframes cursor-blink {
-    0%, 40% { 
-      opacity: 1; 
-      transform: scale(1.2); 
-      filter: drop-shadow(0 0 8px #39d353);
+    0%, 40% {
+      opacity: 1;
+      transform: scale(1.2);
+      filter: drop-shadow(0 0 8px #4cd7f6);
     }
-    50%, 100% { 
-      opacity: 0.2; 
-      transform: scale(0.6); 
-      filter: drop-shadow(0 0 2px #39d353);
+    50%, 100% {
+      opacity: 0.2;
+      transform: scale(0.6);
+      filter: drop-shadow(0 0 2px #4cd7f6);
     }
   }
 </style>
