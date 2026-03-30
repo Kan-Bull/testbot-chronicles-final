@@ -88,7 +88,7 @@ const tagColors = ['cyan', 'fuchsia', 'cyan'] as const;
           Architecting robust digital ecosystems through kinetic engineering and precision automation. Transforming complex infrastructures into seamless velocity.
         </p>
         <div class="flex flex-wrap gap-4 pt-4">
-          <a href="#contact" class="bg-gradient-to-r from-secondary to-secondary-container text-on-secondary-fixed px-8 py-4 rounded-xl font-bold flex items-center gap-2 hover:shadow-[0_0_30px_rgba(76,215,246,0.3)] transition-all">
+          <a href="#portfolio" class="bg-gradient-to-r from-secondary to-secondary-container text-on-secondary-fixed px-8 py-4 rounded-xl font-bold flex items-center gap-2 hover:shadow-[0_0_30px_rgba(76,215,246,0.3)] transition-all">
             View Engineering Portfolio
             <span class="material-symbols-outlined">arrow_forward</span>
           </a>
@@ -190,6 +190,121 @@ const tagColors = ['cyan', 'fuchsia', 'cyan'] as const;
           </div>
           <div class="mt-6 h-1 w-0 bg-tertiary group-hover:w-full transition-all duration-500"></div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PORTFOLIO SECTION -->
+  <section class="py-32 bg-surface-container-low relative" id="portfolio">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="mb-20 space-y-4">
+        <div class="text-secondary font-mono font-bold uppercase tracking-widest flex items-center gap-2">
+          <span class="relative flex h-2 w-2">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-secondary"></span>
+          </span>
+          Engineering Portfolio
+        </div>
+        <h2 class="text-5xl font-headline font-bold">Built &amp; Shipped</h2>
+      </div>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+
+        <!-- Bento -->
+        <div class="group bg-surface-container rounded-xl overflow-hidden border border-outline-variant/20 card-hover transition-all duration-300">
+          <div class="h-56 overflow-hidden">
+            <img src="/images/portfolio/bento.png" alt="Bento - Visual Test Automation Platform" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+          </div>
+          <div class="p-8 space-y-4">
+            <div class="flex items-center justify-between">
+              <span class="bg-cyan-500/90 text-white px-3 py-1 rounded-lg text-xs font-mono font-bold uppercase tracking-tighter backdrop-blur-md">QA Platform</span>
+              <a href="https://github.com/Kan-Bull/Bento" target="_blank" rel="noopener noreferrer" class="text-on-surface-variant hover:text-secondary transition-colors flex items-center gap-1 text-sm font-mono">
+                GitHub <span class="material-symbols-outlined text-base">arrow_outward</span>
+              </a>
+            </div>
+            <h3 class="text-2xl font-bold group-hover:text-secondary transition-colors">Bento</h3>
+            <p class="text-on-surface opacity-80 leading-relaxed">Visual test automation built on Playwright. Drag-and-drop test builder with bidirectional code generation — build tests visually, export real Playwright code.</p>
+            <div class="flex flex-wrap gap-2 pt-2">
+              <span class="px-2.5 py-1 rounded-md bg-surface-container-high text-[10px] font-mono uppercase tracking-widest text-on-surface-variant">TypeScript</span>
+              <span class="px-2.5 py-1 rounded-md bg-surface-container-high text-[10px] font-mono uppercase tracking-widest text-on-surface-variant">React</span>
+              <span class="px-2.5 py-1 rounded-md bg-surface-container-high text-[10px] font-mono uppercase tracking-widest text-on-surface-variant">tRPC</span>
+              <span class="px-2.5 py-1 rounded-md bg-surface-container-high text-[10px] font-mono uppercase tracking-widest text-on-surface-variant">PostgreSQL</span>
+              <span class="px-2.5 py-1 rounded-md bg-surface-container-high text-[10px] font-mono uppercase tracking-widest text-on-surface-variant">Turborepo</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Praxis -->
+        <div class="group bg-surface-container rounded-xl overflow-hidden border border-outline-variant/20 card-hover transition-all duration-300">
+          <div class="h-56 overflow-hidden">
+            <img src="/images/portfolio/praxis.png" alt="Praxis - Privacy-First Workflow Guide Capture" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+          </div>
+          <div class="p-8 space-y-4">
+            <div class="flex items-center justify-between">
+              <span class="bg-fuchsia-500/90 text-white px-3 py-1 rounded-lg text-xs font-mono font-bold uppercase tracking-tighter backdrop-blur-md">Privacy Tool</span>
+              <a href="https://github.com/Kan-Bull/Praxis" target="_blank" rel="noopener noreferrer" class="text-on-surface-variant hover:text-tertiary transition-colors flex items-center gap-1 text-sm font-mono">
+                GitHub <span class="material-symbols-outlined text-base">arrow_outward</span>
+              </a>
+            </div>
+            <h3 class="text-2xl font-bold group-hover:text-tertiary transition-colors">Praxis</h3>
+            <p class="text-on-surface opacity-80 leading-relaxed">Privacy-first Chrome extension for capturing workflow guides. Auto-screenshots, annotations, destructive PII redaction — zero network requests, ever.</p>
+            <div class="flex flex-wrap gap-2 pt-2">
+              <span class="px-2.5 py-1 rounded-md bg-surface-container-high text-[10px] font-mono uppercase tracking-widest text-on-surface-variant">TypeScript</span>
+              <span class="px-2.5 py-1 rounded-md bg-surface-container-high text-[10px] font-mono uppercase tracking-widest text-on-surface-variant">Preact</span>
+              <span class="px-2.5 py-1 rounded-md bg-surface-container-high text-[10px] font-mono uppercase tracking-widest text-on-surface-variant">Fabric.js</span>
+              <span class="px-2.5 py-1 rounded-md bg-surface-container-high text-[10px] font-mono uppercase tracking-widest text-on-surface-variant">Playwright</span>
+              <span class="px-2.5 py-1 rounded-md bg-surface-container-high text-[10px] font-mono uppercase tracking-widest text-on-surface-variant">654+ Tests</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Lume -->
+        <div class="group bg-surface-container rounded-xl overflow-hidden border border-outline-variant/20 card-hover transition-all duration-300">
+          <div class="h-56 overflow-hidden">
+            <img src="/images/portfolio/lume.png" alt="Lume - AI-Powered Learning Platform" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+          </div>
+          <div class="p-8 space-y-4">
+            <div class="flex items-center justify-between">
+              <span class="bg-cyan-500/90 text-white px-3 py-1 rounded-lg text-xs font-mono font-bold uppercase tracking-tighter backdrop-blur-md">AI / Education</span>
+              <a href="https://github.com/Kan-Bull/Lume" target="_blank" rel="noopener noreferrer" class="text-on-surface-variant hover:text-secondary transition-colors flex items-center gap-1 text-sm font-mono">
+                GitHub <span class="material-symbols-outlined text-base">arrow_outward</span>
+              </a>
+            </div>
+            <h3 class="text-2xl font-bold group-hover:text-secondary transition-colors">Lume</h3>
+            <p class="text-on-surface opacity-80 leading-relaxed">AI-powered desktop app generating personalized learning paths, lessons, and flashcards. Dual-AI architecture with GPT generation and Gemini quality review.</p>
+            <div class="flex flex-wrap gap-2 pt-2">
+              <span class="px-2.5 py-1 rounded-md bg-surface-container-high text-[10px] font-mono uppercase tracking-widest text-on-surface-variant">Electron</span>
+              <span class="px-2.5 py-1 rounded-md bg-surface-container-high text-[10px] font-mono uppercase tracking-widest text-on-surface-variant">OpenAI</span>
+              <span class="px-2.5 py-1 rounded-md bg-surface-container-high text-[10px] font-mono uppercase tracking-widest text-on-surface-variant">Gemini</span>
+              <span class="px-2.5 py-1 rounded-md bg-surface-container-high text-[10px] font-mono uppercase tracking-widest text-on-surface-variant">SQLite</span>
+              <span class="px-2.5 py-1 rounded-md bg-surface-container-high text-[10px] font-mono uppercase tracking-widest text-on-surface-variant">Monaco</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Aegis -->
+        <div class="group bg-surface-container rounded-xl overflow-hidden border border-outline-variant/20 card-hover transition-all duration-300">
+          <div class="h-56 overflow-hidden">
+            <img src="/images/portfolio/aegis.png" alt="Aegis - AI Development Framework" class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+          </div>
+          <div class="p-8 space-y-4">
+            <div class="flex items-center justify-between">
+              <span class="bg-fuchsia-500/90 text-white px-3 py-1 rounded-lg text-xs font-mono font-bold uppercase tracking-tighter backdrop-blur-md">Dev Tooling</span>
+              <a href="https://github.com/Kan-Bull/aegis" target="_blank" rel="noopener noreferrer" class="text-on-surface-variant hover:text-tertiary transition-colors flex items-center gap-1 text-sm font-mono">
+                GitHub <span class="material-symbols-outlined text-base">arrow_outward</span>
+              </a>
+            </div>
+            <h3 class="text-2xl font-bold group-hover:text-tertiary transition-colors">Aegis</h3>
+            <p class="text-on-surface opacity-80 leading-relaxed">Structured AI development framework for Claude Code. Adaptive complexity scaling, 9 specialized agents, and automated quality gates that intercept every push.</p>
+            <div class="flex flex-wrap gap-2 pt-2">
+              <span class="px-2.5 py-1 rounded-md bg-surface-container-high text-[10px] font-mono uppercase tracking-widest text-on-surface-variant">Shell</span>
+              <span class="px-2.5 py-1 rounded-md bg-surface-container-high text-[10px] font-mono uppercase tracking-widest text-on-surface-variant">Claude Code</span>
+              <span class="px-2.5 py-1 rounded-md bg-surface-container-high text-[10px] font-mono uppercase tracking-widest text-on-surface-variant">MCP</span>
+              <span class="px-2.5 py-1 rounded-md bg-surface-container-high text-[10px] font-mono uppercase tracking-widest text-on-surface-variant">Playwright</span>
+              <span class="px-2.5 py-1 rounded-md bg-surface-container-high text-[10px] font-mono uppercase tracking-widest text-on-surface-variant">MIT</span>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
