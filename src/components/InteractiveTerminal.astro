@@ -23,52 +23,54 @@
       <div class="p-6 font-mono text-[13px] leading-relaxed h-[320px] lg:h-[400px] relative overflow-hidden flex flex-col">
         <!-- Scrollable content area -->
         <div id="terminal-content" class="flex-1 overflow-y-auto pr-2" style="scrollbar-width: thin; scrollbar-color: #4cd7f6 transparent;">
-          <div class="mb-2">
-            <span class="text-tertiary">Welcome to TestBot Terminal v2.1.0</span>
-          </div>
-          <div class="text-on-surface-variant mb-3">
-            <span class="text-secondary">New to terminals?</span> No problem! Click the suggestions below or type commands.
-          </div>
-
-          <!-- Quick Command Buttons -->
-          <div class="mb-4 space-y-2">
-            <!-- First row -->
-            <div class="flex flex-wrap gap-1 sm:gap-2">
-              <button class="px-3 py-1.5 rounded-lg bg-surface-container-high/80 border border-outline-variant/20 hover:border-secondary/40 text-[10px] uppercase tracking-widest font-bold font-mono text-on-surface-variant hover:text-secondary transition-all hover:scale-105" id="btn-whoami">
-                [whoami] About Me
-              </button>
-              <button class="px-3 py-1.5 rounded-lg bg-surface-container-high/80 border border-outline-variant/20 hover:border-secondary/40 text-[10px] uppercase tracking-widest font-bold font-mono text-on-surface-variant hover:text-secondary transition-all hover:scale-105" id="btn-skills">
-                [skills] My Skills
-              </button>
-              <button class="px-3 py-1.5 rounded-lg bg-surface-container-high/80 border border-outline-variant/20 hover:border-secondary/40 text-[10px] uppercase tracking-widest font-bold font-mono text-on-surface-variant hover:text-secondary transition-all hover:scale-105" id="btn-contact">
-                [contact] Contact
-              </button>
-              <button class="px-3 py-1.5 rounded-lg bg-surface-container-high/80 border border-outline-variant/20 hover:border-secondary/40 text-[10px] uppercase tracking-widest font-bold font-mono text-on-surface-variant hover:text-secondary transition-all hover:scale-105" id="btn-projects">
-                [projects] Projects
-              </button>
-              <button class="px-3 py-1.5 rounded-lg bg-surface-container-high/80 border border-outline-variant/20 hover:border-secondary/40 text-[10px] uppercase tracking-widest font-bold font-mono text-on-surface-variant hover:text-secondary transition-all hover:scale-105" id="btn-hire-me">
-                [hire] Hire Me
-              </button>
+          <!-- Intro animation plays here, then replaced by interactive content -->
+          <div id="terminal-intro"></div>
+          <div id="terminal-interactive" class="hidden">
+            <div class="mb-2">
+              <span class="text-tertiary">Welcome to TestBot Terminal v2.1.0</span>
             </div>
-            <!-- Second row -->
-            <div class="flex flex-wrap gap-1 sm:gap-2">
-              <button class="px-3 py-1.5 rounded-lg bg-surface-container-high/80 border border-outline-variant/20 hover:border-secondary/40 text-[10px] uppercase tracking-widest font-bold font-mono text-on-surface-variant hover:text-secondary transition-all hover:scale-105" id="btn-experience">
-                [experience] Work History
-              </button>
-              <button class="px-3 py-1.5 rounded-lg bg-surface-container-high/80 border border-outline-variant/20 hover:border-secondary/40 text-[10px] uppercase tracking-widest font-bold font-mono text-on-surface-variant hover:text-secondary transition-all hover:scale-105" id="btn-blog">
-                [blog] TestBot Chronicles
-              </button>
-              <button class="px-3 py-1.5 rounded-lg bg-surface-container-high/80 border border-outline-variant/20 hover:border-secondary/40 text-[10px] uppercase tracking-widest font-bold font-mono text-on-surface-variant hover:text-secondary transition-all hover:scale-105" id="btn-logo">
-                [logo] ASCII Art
-              </button>
-              <button class="px-3 py-1.5 rounded-lg bg-surface-container-high/80 border border-outline-variant/20 hover:border-secondary/40 text-[10px] uppercase tracking-widest font-bold font-mono text-on-surface-variant hover:text-secondary transition-all hover:scale-105" id="btn-help">
-                [help] All Commands
-              </button>
+            <div class="text-on-surface-variant mb-3">
+              <span class="text-secondary">New to terminals?</span> No problem! Click the suggestions below or type commands.
             </div>
-          </div>
 
-          <div class="text-on-surface-variant mb-4 text-xs">
-            <span class="text-secondary">tip:</span> Use Tab for auto-complete, ↑↓ arrows for history
+            <!-- Quick Command Buttons -->
+            <div class="mb-4 space-y-2">
+              <div class="flex flex-wrap gap-1 sm:gap-2">
+                <button class="px-3 py-1.5 rounded-lg bg-surface-container-high/80 border border-outline-variant/20 hover:border-secondary/40 text-[10px] uppercase tracking-widest font-bold font-mono text-on-surface-variant hover:text-secondary transition-all hover:scale-105" id="btn-whoami">
+                  [whoami] About Me
+                </button>
+                <button class="px-3 py-1.5 rounded-lg bg-surface-container-high/80 border border-outline-variant/20 hover:border-secondary/40 text-[10px] uppercase tracking-widest font-bold font-mono text-on-surface-variant hover:text-secondary transition-all hover:scale-105" id="btn-skills">
+                  [skills] My Skills
+                </button>
+                <button class="px-3 py-1.5 rounded-lg bg-surface-container-high/80 border border-outline-variant/20 hover:border-secondary/40 text-[10px] uppercase tracking-widest font-bold font-mono text-on-surface-variant hover:text-secondary transition-all hover:scale-105" id="btn-contact">
+                  [contact] Contact
+                </button>
+                <button class="px-3 py-1.5 rounded-lg bg-surface-container-high/80 border border-outline-variant/20 hover:border-secondary/40 text-[10px] uppercase tracking-widest font-bold font-mono text-on-surface-variant hover:text-secondary transition-all hover:scale-105" id="btn-projects">
+                  [projects] Projects
+                </button>
+                <button class="px-3 py-1.5 rounded-lg bg-surface-container-high/80 border border-outline-variant/20 hover:border-secondary/40 text-[10px] uppercase tracking-widest font-bold font-mono text-on-surface-variant hover:text-secondary transition-all hover:scale-105" id="btn-hire-me">
+                  [hire] Hire Me
+                </button>
+              </div>
+              <div class="flex flex-wrap gap-1 sm:gap-2">
+                <button class="px-3 py-1.5 rounded-lg bg-surface-container-high/80 border border-outline-variant/20 hover:border-secondary/40 text-[10px] uppercase tracking-widest font-bold font-mono text-on-surface-variant hover:text-secondary transition-all hover:scale-105" id="btn-experience">
+                  [experience] Work History
+                </button>
+                <button class="px-3 py-1.5 rounded-lg bg-surface-container-high/80 border border-outline-variant/20 hover:border-secondary/40 text-[10px] uppercase tracking-widest font-bold font-mono text-on-surface-variant hover:text-secondary transition-all hover:scale-105" id="btn-blog">
+                  [blog] TestBot Chronicles
+                </button>
+                <button class="px-3 py-1.5 rounded-lg bg-surface-container-high/80 border border-outline-variant/20 hover:border-secondary/40 text-[10px] uppercase tracking-widest font-bold font-mono text-on-surface-variant hover:text-secondary transition-all hover:scale-105" id="btn-logo">
+                  [logo] ASCII Art
+                </button>
+                <button class="px-3 py-1.5 rounded-lg bg-surface-container-high/80 border border-outline-variant/20 hover:border-secondary/40 text-[10px] uppercase tracking-widest font-bold font-mono text-on-surface-variant hover:text-secondary transition-all hover:scale-105" id="btn-help">
+                  [help] All Commands
+                </button>
+              </div>
+            </div>
+
+            <div class="text-on-surface-variant mb-4 text-xs">
+              <span class="text-secondary">tip:</span> Use Tab for auto-complete, ↑↓ arrows for history
+            </div>
           </div>
         </div>
 
@@ -137,15 +139,67 @@
         experience: this.showExperience.bind(this),
       };
       
+      this.introPlaying = true;
+      this.introTimeouts = [];
+      this.introContainer = document.getElementById('terminal-intro');
+      this.interactiveContainer = document.getElementById('terminal-interactive');
+
       this.setupEventListeners();
-      this.setupButtonListeners();
       this.setupWindowControls();
       this.setupFontControls();
+      this.playIntro();
+    }
+
+    playIntro() {
+      const lines = [
+        { text: '<span class="text-secondary">titus-automation $</span> <span class="text-on-surface">npm run automate --env=production</span>', delay: 0 },
+        { text: '<span class="text-on-surface-variant/60 italic"># Handshaking with Core API clusters...</span>', delay: 600 },
+        { text: '<span class="text-green-400 font-bold">[PASS]</span>  <span class="text-on-surface/80">Payload Schema Validation: 0.04s</span>', delay: 1200 },
+        { text: '<span class="text-green-400 font-bold">[PASS]</span>  <span class="text-on-surface/80">Concurrency Stress Test (10k/sec)</span>', delay: 1800 },
+        { text: '<span class="text-green-400 font-bold">[PASS]</span>  <span class="text-on-surface/80">Cross-Browser Pixel Sync (99.98% match)</span>', delay: 2400 },
+        { text: '<span class="text-green-400 font-bold">[PASS]</span>  <span class="text-on-surface/80">Latency Benchmarks: Avg 112ms</span>', delay: 3000 },
+        { text: '<span class="text-tertiary font-bold">➜ Deployment Gate Status: CLEAR</span>', delay: 3600 },
+      ];
+
+      lines.forEach(({ text, delay }) => {
+        const t = setTimeout(() => {
+          if (!this.introPlaying) return;
+          const div = document.createElement('div');
+          div.className = 'mb-2';
+          div.innerHTML = text;
+          this.introContainer.appendChild(div);
+          this.content.scrollTop = this.content.scrollHeight;
+        }, delay);
+        this.introTimeouts.push(t);
+      });
+
+      // After intro finishes, transition to interactive mode
+      const finishTimeout = setTimeout(() => {
+        if (!this.introPlaying) return;
+        this.finishIntro();
+      }, 4800);
+      this.introTimeouts.push(finishTimeout);
+    }
+
+    skipIntro() {
+      if (!this.introPlaying) return;
+      this.introTimeouts.forEach(t => clearTimeout(t));
+      this.introTimeouts = [];
+      this.finishIntro();
+    }
+
+    finishIntro() {
+      this.introPlaying = false;
+      this.introContainer.classList.add('hidden');
+      this.interactiveContainer.classList.remove('hidden');
+      this.initialContent = this.content.innerHTML;
+      this.setupButtonListeners();
       this.focusInput();
     }
     
     setupEventListeners() {
       this.input.addEventListener('keydown', (e) => {
+        if (this.introPlaying) { this.skipIntro(); return; }
         if (e.key === 'Enter') {
           this.hideSuggestions();
           this.processCommand();
@@ -175,6 +229,7 @@
       // Focus input when clicking anywhere in terminal
       document.addEventListener('click', (e) => {
         if (e.target.closest('#terminal-body')) {
+          if (this.introPlaying) { this.skipIntro(); }
           this.focusInput();
         }
       });
