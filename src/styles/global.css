@@ -39,10 +39,12 @@
 
   /* Gradient text — cyan to fuchsia */
   .text-gradient {
-    background: linear-gradient(to right, #4cd7f6, #fbabff);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    background: linear-gradient(to right, #4cd7f6, #fbabff) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
+    color: transparent !important;
+    display: inline-block;
   }
 
   /* Ghost borders */
