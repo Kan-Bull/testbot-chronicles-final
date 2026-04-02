@@ -2,198 +2,358 @@
 // Interactive Terminal Component
 ---
 
-<div class="w-full max-w-4xl mx-auto mb-8 px-4 sm:px-6 lg:px-8" id="terminal-container">
-  <!-- Terminal Header -->
-  <div class="bg-terminal-bg rounded-t-lg p-3 flex items-center justify-between">
-    <div class="flex items-center space-x-2">
-      <div id="close-btn" class="w-3 h-3 bg-red-500 rounded-full hover:bg-red-400 cursor-pointer transition" title="Close Terminal"></div>
-      <div id="minimize-btn" class="w-3 h-3 bg-yellow-500 rounded-full hover:bg-yellow-400 cursor-pointer transition" title="Minimize Terminal"></div>
-      <div id="maximize-btn" class="w-3 h-3 bg-green-500 rounded-full hover:bg-green-400 cursor-pointer transition" title="Maximize Terminal"></div>
-      <span class="text-terminal-gray text-sm ml-4 font-mono">terminal@testbot-chronicles</span>
-    </div>
-    <div class="flex items-center space-x-2">
-      <button id="font-smaller" class="text-terminal-gray hover:text-white text-xs font-mono px-2 py-1 hover:bg-white/10 rounded transition" title="Decrease Font Size">A-</button>
-      <button id="font-bigger" class="text-terminal-gray hover:text-white text-xs font-mono px-2 py-1 hover:bg-white/10 rounded transition" title="Increase Font Size">A+</button>
-      <img src="/images/brand/titusLogo.png" alt="Titus Logo" class="h-6 w-auto opacity-60" />
-    </div>
-  </div>
-  
-  <!-- Terminal Body -->
-  <div class="bg-terminal-bg/40 backdrop-blur-xl rounded-b-lg p-3 sm:p-4 lg:p-6 text-left font-mono text-xs sm:text-sm h-[400px] sm:h-[450px] lg:h-[500px] relative overflow-hidden flex flex-col">
-    <!-- Scrollable content area -->
-    <div id="terminal-content" class="flex-1 overflow-y-auto pr-2" style="scrollbar-width: thin; scrollbar-color: #39d353 transparent;">
-      <div class="text-terminal-green mb-2">
-        <span class="text-terminal-orange">Welcome to TestBot Terminal v2.1.0</span>
-      </div>
-      <div class="text-terminal-gray mb-3">
-        <span class="text-terminal-blue">New to terminals?</span> No problem! Click the suggestions below or type commands.
-      </div>
-      
-      <!-- Quick Command Buttons -->
-      <div class="mb-4 space-y-2">
-        <!-- First row -->
-        <div class="flex flex-wrap gap-1 sm:gap-2">
-          <button class="terminal-button" id="btn-whoami">
-            [whoami] About Me
-          </button>
-          <button class="terminal-button" id="btn-skills">
-            [skills] My Skills
-          </button>
-          <button class="terminal-button" id="btn-contact">
-            [contact] Contact
-          </button>
-          <button class="terminal-button" id="btn-projects">
-            [projects] Projects
-          </button>
-          <button class="terminal-button" id="btn-hire-me">
-            [hire] Hire Me
-          </button>
+<div id="terminal-container" class="relative group min-w-0 w-full">
+  <div
+    class="glass-panel border-ghost rounded-xl p-1 overflow-hidden glow-cyan group-hover:border-ghost-active transition-all duration-300 min-w-0"
+  >
+    <!-- Terminal Header -->
+    <div
+      class="bg-surface-container-high border-b border-white/10 rounded-t-lg p-3 flex items-center justify-between"
+    >
+      <div class="flex items-center space-x-2">
+        <div
+          id="close-btn"
+          class="w-3 h-3 bg-[#FF5F56] rounded-full cursor-pointer transition"
+          title="Close Terminal"
+        >
         </div>
-        <!-- Second row -->
-        <div class="flex flex-wrap gap-1 sm:gap-2">
-          <button class="terminal-button" id="btn-experience">
-            [experience] Work History
-          </button>
-          <button class="terminal-button" id="btn-blog">
-            [blog] TestBot Chronicles
-          </button>
-          <button class="terminal-button" id="btn-logo">
-            [logo] ASCII Art
-          </button>
-          <button class="terminal-button" id="btn-help">
-            [help] All Commands
-          </button>
+        <div
+          id="minimize-btn"
+          class="w-3 h-3 bg-[#FFBD2E] rounded-full cursor-pointer transition"
+          title="Minimize Terminal"
+        >
         </div>
+        <div
+          id="maximize-btn"
+          class="w-3 h-3 bg-[#27C93F] rounded-full cursor-pointer transition"
+          title="Maximize Terminal"
+        >
+        </div>
+        <span
+          class="text-[11px] font-mono text-on-surface-variant font-medium ml-4"
+          >titus-automation - zsh</span
+        >
       </div>
-      
-      <div class="text-terminal-gray mb-4 text-xs">
-        <span class="text-terminal-blue">tip:</span> Use Tab for auto-complete, ↑↓ arrows for history
-      </div>
-    </div>
-    
-    <!-- Fixed command line at bottom -->
-    <div class="relative mt-4 border-t border-terminal-green/20 pt-4">
-      <div class="flex items-center">
-        <span class="text-terminal-green mr-2">titus@consulting:~$</span>
-        <input 
-          type="text" 
-          id="terminal-input" 
-          class="bg-transparent text-terminal-gray outline-none flex-1 font-mono" 
-          placeholder="Type a command or click suggestions above..."
-          autocomplete="off"
-          spellcheck="false"
-        />
-        <span class="text-terminal-green cursor-blink ml-1">|</span>
-      </div>
-      
-      <!-- Auto-suggestions dropdown -->
-      <div id="suggestions" class="absolute bottom-full left-0 right-0 bg-terminal-bg border border-terminal-green/30 rounded-md hidden z-10 max-h-32 overflow-y-auto mb-2">
+      <div class="flex items-center space-x-2">
+        <button
+          id="font-smaller"
+          class="text-[10px] font-mono text-on-surface-variant hover:text-secondary transition-colors px-2 py-1"
+          title="Decrease Font Size">A-</button
+        >
+        <button
+          id="font-bigger"
+          class="text-[10px] font-mono text-on-surface-variant hover:text-secondary transition-colors px-2 py-1"
+          title="Increase Font Size">A+</button
+        >
       </div>
     </div>
-    
-    <!-- Particles effect -->
-    <div id="particles" class="absolute inset-0 pointer-events-none"></div>
+
+    <!-- Terminal Body -->
+    <div
+      id="terminal-body"
+      class="bg-slate-950 rounded-lg overflow-hidden border border-white/5 min-w-0"
+    >
+      <div
+        class="p-3 sm:p-6 font-mono text-[11px] sm:text-[13px] leading-relaxed h-[320px] lg:h-[400px] relative overflow-hidden flex flex-col min-w-0"
+      >
+        <!-- Scrollable content area -->
+        <div
+          id="terminal-content"
+          class="flex-1 overflow-y-auto overflow-x-hidden pr-2"
+          style="scrollbar-width: thin; scrollbar-color: #4cd7f6 transparent;"
+        >
+          <!-- Intro animation plays here, then replaced by interactive content -->
+          <div id="terminal-intro"></div>
+          <div id="terminal-interactive" class="hidden">
+            <div class="mb-2 truncate">
+              <span class="text-tertiary"
+                >Welcome to TestBot Terminal v2.1.0</span
+              >
+            </div>
+            <div class="text-on-surface-variant mb-3 text-[10px] sm:text-xs">
+              <span class="text-secondary">New to terminals?</span> Click the suggestions
+              below or type commands.
+            </div>
+
+            <!-- Quick Command Buttons -->
+            <div class="mb-4 space-y-2 mx-1">
+              <div class="flex flex-wrap gap-1 sm:gap-2">
+                <button
+                  class="px-2 py-1 sm:px-3 sm:py-1.5 rounded-lg bg-surface-container-high/80 border border-outline-variant/20 hover:border-secondary/40 text-[8px] sm:text-[10px] uppercase tracking-wider sm:tracking-widest font-bold font-mono text-on-surface-variant hover:text-secondary transition-all hover:scale-105"
+                  id="btn-whoami"
+                >
+                  [whoami] About Me
+                </button>
+                <button
+                  class="px-2 py-1 sm:px-3 sm:py-1.5 rounded-lg bg-surface-container-high/80 border border-outline-variant/20 hover:border-secondary/40 text-[8px] sm:text-[10px] uppercase tracking-wider sm:tracking-widest font-bold font-mono text-on-surface-variant hover:text-secondary transition-all hover:scale-105"
+                  id="btn-skills"
+                >
+                  [skills] My Skills
+                </button>
+                <button
+                  class="px-2 py-1 sm:px-3 sm:py-1.5 rounded-lg bg-surface-container-high/80 border border-outline-variant/20 hover:border-secondary/40 text-[8px] sm:text-[10px] uppercase tracking-wider sm:tracking-widest font-bold font-mono text-on-surface-variant hover:text-secondary transition-all hover:scale-105"
+                  id="btn-contact"
+                >
+                  [contact] Contact
+                </button>
+                <button
+                  class="px-2 py-1 sm:px-3 sm:py-1.5 rounded-lg bg-surface-container-high/80 border border-outline-variant/20 hover:border-secondary/40 text-[8px] sm:text-[10px] uppercase tracking-wider sm:tracking-widest font-bold font-mono text-on-surface-variant hover:text-secondary transition-all hover:scale-105"
+                  id="btn-projects"
+                >
+                  [projects] Projects
+                </button>
+                <button
+                  class="px-2 py-1 sm:px-3 sm:py-1.5 rounded-lg bg-surface-container-high/80 border border-outline-variant/20 hover:border-secondary/40 text-[8px] sm:text-[10px] uppercase tracking-wider sm:tracking-widest font-bold font-mono text-on-surface-variant hover:text-secondary transition-all hover:scale-105"
+                  id="btn-hire-me"
+                >
+                  [hire] Hire Me
+                </button>
+              </div>
+              <div class="flex flex-wrap gap-1 sm:gap-2">
+                <button
+                  class="px-2 py-1 sm:px-3 sm:py-1.5 rounded-lg bg-surface-container-high/80 border border-outline-variant/20 hover:border-secondary/40 text-[8px] sm:text-[10px] uppercase tracking-wider sm:tracking-widest font-bold font-mono text-on-surface-variant hover:text-secondary transition-all hover:scale-105"
+                  id="btn-experience"
+                >
+                  [experience] Work History
+                </button>
+                <button
+                  class="px-2 py-1 sm:px-3 sm:py-1.5 rounded-lg bg-surface-container-high/80 border border-outline-variant/20 hover:border-secondary/40 text-[8px] sm:text-[10px] uppercase tracking-wider sm:tracking-widest font-bold font-mono text-on-surface-variant hover:text-secondary transition-all hover:scale-105"
+                  id="btn-blog"
+                >
+                  [blog] TestBot Chronicles
+                </button>
+                <button
+                  class="px-2 py-1 sm:px-3 sm:py-1.5 rounded-lg bg-surface-container-high/80 border border-outline-variant/20 hover:border-secondary/40 text-[8px] sm:text-[10px] uppercase tracking-wider sm:tracking-widest font-bold font-mono text-on-surface-variant hover:text-secondary transition-all hover:scale-105"
+                  id="btn-logo"
+                >
+                  [logo] ASCII Art
+                </button>
+                <button
+                  class="px-2 py-1 sm:px-3 sm:py-1.5 rounded-lg bg-surface-container-high/80 border border-outline-variant/20 hover:border-secondary/40 text-[8px] sm:text-[10px] uppercase tracking-wider sm:tracking-widest font-bold font-mono text-on-surface-variant hover:text-secondary transition-all hover:scale-105"
+                  id="btn-help"
+                >
+                  [help] All Commands
+                </button>
+              </div>
+            </div>
+
+            <div class="text-on-surface-variant mb-4 text-xs">
+              <span class="text-secondary">tip:</span> Use Tab for auto-complete,
+              ↑↓ arrows for history
+            </div>
+          </div>
+        </div>
+
+        <!-- Fixed command line at bottom -->
+        <div class="relative mt-4 border-t border-secondary/20 pt-4">
+          <div class="flex items-center">
+            <span class="text-secondary mr-2">titus-automation $</span>
+            <span class="block-cursor"></span><input
+              type="text"
+              id="terminal-input"
+              class="bg-transparent text-on-surface outline-none flex-1 font-mono"
+              placeholder="Type a command or click suggestions above..."
+              autocomplete="off"
+              spellcheck="false"
+            />
+          </div>
+
+          <!-- Auto-suggestions dropdown -->
+          <div
+            id="suggestions"
+            class="absolute bottom-full left-0 right-0 bg-surface-container-lowest border border-secondary/30 rounded-md hidden z-10 max-h-32 overflow-y-auto mb-2"
+          >
+          </div>
+        </div>
+
+        <!-- Particles effect -->
+        <div id="particles" class="absolute inset-0 pointer-events-none"></div>
+      </div>
+    </div>
   </div>
 </div>
 
 <script is:inline>
   class InteractiveTerminal {
     constructor() {
-      this.input = document.getElementById('terminal-input');
-      this.content = document.getElementById('terminal-content');
-      this.suggestions = document.getElementById('suggestions');
+      this.input = document.getElementById("terminal-input");
+      this.content = document.getElementById("terminal-content");
+      this.suggestions = document.getElementById("suggestions");
       this.commandHistory = [];
       this.historyIndex = -1;
       this.showingSuggestions = false;
-      
+      this.outputQueue = [];
+      this.queueRunning = false;
+
       // Store the initial content to restore on clear
       this.initialContent = this.content.innerHTML;
-      
+
       this.commands = {
         help: this.showHelp.bind(this),
         whoami: this.showWhoami.bind(this),
         whoistitus: this.showWhoIsTitus.bind(this),
         skills: this.showSkills.bind(this),
-        'skills.json': this.showSkillsJson.bind(this),
+        "skills.json": this.showSkillsJson.bind(this),
         projects: this.showProjects.bind(this),
         contact: this.showContact.bind(this),
-        'ls': this.listDirectory.bind(this),
-        'cat': this.catFile.bind(this),
-        'npm': this.npmCommand.bind(this),
-        'git': this.gitCommand.bind(this),
-        'docker': this.dockerCommand.bind(this),
-        'ping': this.pingCommand.bind(this),
-        'sudo': this.sudoCommand.bind(this),
+        ls: this.listDirectory.bind(this),
+        cat: this.catFile.bind(this),
+        npm: this.npmCommand.bind(this),
+        git: this.gitCommand.bind(this),
+        docker: this.dockerCommand.bind(this),
+        ping: this.pingCommand.bind(this),
+        sudo: this.sudoCommand.bind(this),
         clear: this.clearTerminal.bind(this),
         exit: this.exitTerminal.bind(this),
-        'hire-me': this.hireMe.bind(this),
+        "hire-me": this.hireMe.bind(this),
         about: this.showAbout.bind(this),
         blog: this.showBlog.bind(this),
         logo: this.showLogo.bind(this),
         ascii: this.showLogo.bind(this),
         experience: this.showExperience.bind(this),
       };
-      
+
+      this.introPlaying = true;
+      this.introTimeouts = [];
+      this.introContainer = document.getElementById("terminal-intro");
+      this.interactiveContainer = document.getElementById(
+        "terminal-interactive",
+      );
+
       this.setupEventListeners();
-      this.setupButtonListeners();
       this.setupWindowControls();
       this.setupFontControls();
+      this.playIntro();
+    }
+
+    playIntro() {
+      const lines = [
+        {
+          text: '<span class="text-secondary">titus-automation $</span> <span class="text-on-surface">npm run automate --env=production</span>',
+          delay: 0,
+        },
+        {
+          text: '<span class="text-on-surface-variant/60 italic"># Handshaking with Core API clusters...</span>',
+          delay: 600,
+        },
+        {
+          text: '<span class="text-green-400 font-bold">[PASS]</span>  <span class="text-on-surface/80">Payload Schema Validation: 0.04s</span>',
+          delay: 1200,
+        },
+        {
+          text: '<span class="text-green-400 font-bold">[PASS]</span>  <span class="text-on-surface/80">Concurrency Stress Test (10k/sec)</span>',
+          delay: 1800,
+        },
+        {
+          text: '<span class="text-green-400 font-bold">[PASS]</span>  <span class="text-on-surface/80">Cross-Browser Pixel Sync (99.98% match)</span>',
+          delay: 2400,
+        },
+        {
+          text: '<span class="text-green-400 font-bold">[PASS]</span>  <span class="text-on-surface/80">Latency Benchmarks: Avg 112ms</span>',
+          delay: 3000,
+        },
+        {
+          text: '<span class="text-tertiary font-bold">➜ Deployment Gate Status: CLEAR</span>',
+          delay: 3600,
+        },
+      ];
+
+      lines.forEach(({ text, delay }) => {
+        const t = setTimeout(() => {
+          if (!this.introPlaying) return;
+          const div = document.createElement("div");
+          div.className = "mb-2";
+          div.innerHTML = text;
+          this.introContainer.appendChild(div);
+          this.content.scrollTop = this.content.scrollHeight;
+        }, delay);
+        this.introTimeouts.push(t);
+      });
+
+      // After intro finishes, transition to interactive mode
+      const finishTimeout = setTimeout(() => {
+        if (!this.introPlaying) return;
+        this.finishIntro();
+      }, 4800);
+      this.introTimeouts.push(finishTimeout);
+    }
+
+    skipIntro() {
+      if (!this.introPlaying) return;
+      this.introTimeouts.forEach((t) => clearTimeout(t));
+      this.introTimeouts = [];
+      this.finishIntro();
+    }
+
+    finishIntro() {
+      this.introPlaying = false;
+      this.introContainer.classList.add("hidden");
+      this.interactiveContainer.classList.remove("hidden");
+      this.initialContent = this.content.innerHTML;
+      this.setupButtonListeners();
       this.focusInput();
     }
-    
+
     setupEventListeners() {
-      this.input.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') {
+      this.input.addEventListener("keydown", (e) => {
+        if (this.introPlaying) {
+          this.skipIntro();
+          return;
+        }
+        if (e.key === "Enter") {
           this.hideSuggestions();
           this.processCommand();
-        } else if (e.key === 'ArrowUp') {
+        } else if (e.key === "ArrowUp") {
           e.preventDefault();
           this.navigateHistory(-1);
-        } else if (e.key === 'ArrowDown') {
+        } else if (e.key === "ArrowDown") {
           e.preventDefault();
           this.navigateHistory(1);
-        } else if (e.key === 'Tab') {
+        } else if (e.key === "Tab") {
           e.preventDefault();
           this.autoComplete();
-        } else if (e.key === 'Escape') {
+        } else if (e.key === "Escape") {
           this.hideSuggestions();
         }
       });
-      
-      this.input.addEventListener('input', () => {
+
+      this.input.addEventListener("input", () => {
         this.showSuggestions();
       });
-      
-      this.input.addEventListener('blur', () => {
+
+      this.input.addEventListener("blur", () => {
         // Hide suggestions after a small delay to allow clicking
         setTimeout(() => this.hideSuggestions(), 150);
       });
-      
+
       // Focus input when clicking anywhere in terminal
-      document.addEventListener('click', (e) => {
-        if (e.target.closest('.bg-terminal-bg\\/40')) {
+      document.addEventListener("click", (e) => {
+        if (e.target.closest("#terminal-body")) {
+          if (this.introPlaying) {
+            this.skipIntro();
+          }
           this.focusInput();
         }
       });
     }
-    
+
     setupButtonListeners() {
       const buttons = [
-        { id: 'btn-whoami', command: 'whoami' },
-        { id: 'btn-skills', command: 'skills' },
-        { id: 'btn-contact', command: 'contact' },
-        { id: 'btn-projects', command: 'projects' },
-        { id: 'btn-hire-me', command: 'hire-me' },
-        { id: 'btn-experience', command: 'experience' },
-        { id: 'btn-blog', command: 'blog' },
-        { id: 'btn-logo', command: 'logo' },
-        { id: 'btn-help', command: 'help' }
+        { id: "btn-whoami", command: "whoami" },
+        { id: "btn-skills", command: "skills" },
+        { id: "btn-contact", command: "contact" },
+        { id: "btn-projects", command: "projects" },
+        { id: "btn-hire-me", command: "hire-me" },
+        { id: "btn-experience", command: "experience" },
+        { id: "btn-blog", command: "blog" },
+        { id: "btn-logo", command: "logo" },
+        { id: "btn-help", command: "help" },
       ];
-      
+
       buttons.forEach(({ id, command }) => {
         const button = document.getElementById(id);
         if (button) {
-          button.addEventListener('click', (e) => {
+          button.addEventListener("click", (e) => {
             e.preventDefault();
             e.stopPropagation();
             this.executeQuickCommand(command);
@@ -201,211 +361,246 @@
         }
       });
     }
-    
+
     setupWindowControls() {
-      const terminal = document.getElementById('terminal-container');
-      const terminalBody = document.querySelector('.bg-terminal-bg\\/40');
-      
+      const terminal = document.getElementById("terminal-container");
+      const terminalBody = document.getElementById("terminal-body");
+
       // Close button (red) - minimizes terminal
-      const closeBtn = document.getElementById('close-btn');
+      const closeBtn = document.getElementById("close-btn");
       if (closeBtn) {
-        closeBtn.addEventListener('click', () => {
-          this.addOutput('🔴 Terminal session ended. Refresh page to restart.', 'terminal-orange');
+        closeBtn.addEventListener("click", () => {
+          this.addOutput(
+            "Terminal session ended. Refresh page to restart.",
+            "terminal-orange",
+          );
           this.input.disabled = true;
-          this.input.placeholder = 'Terminal closed. Refresh page to restart.';
-          if (terminalBody) terminalBody.style.opacity = '0.3';
+          this.input.placeholder = "Terminal closed. Refresh page to restart.";
+          if (terminalBody) terminalBody.style.opacity = "0.3";
         });
       }
-      
+
       // Minimize button (yellow) - toggles compact mode
       let isMinimized = false;
-      const minimizeBtn = document.getElementById('minimize-btn');
+      const minimizeBtn = document.getElementById("minimize-btn");
       if (minimizeBtn) {
-        minimizeBtn.addEventListener('click', () => {
+        minimizeBtn.addEventListener("click", () => {
           if (!isMinimized) {
             // Responsive minimize height
             if (terminalBody) {
               if (window.innerWidth < 640) {
-                terminalBody.style.height = '120px';
+                terminalBody.style.height = "120px";
               } else if (window.innerWidth < 1024) {
-                terminalBody.style.height = '140px';
+                terminalBody.style.height = "140px";
               } else {
-                terminalBody.style.height = '150px';
+                terminalBody.style.height = "150px";
               }
             }
-            this.addOutput('🟡 Terminal minimized. Click yellow button to restore.', 'terminal-orange');
+            this.addOutput(
+              "Terminal minimized. Click yellow button to restore.",
+              "terminal-orange",
+            );
             isMinimized = true;
           } else {
             // Restore to responsive height
             if (terminalBody) {
-              terminalBody.style.height = '';
+              terminalBody.style.height = "";
             }
-            this.addOutput('🟡 Terminal restored to normal size.', 'terminal-blue');
+            this.addOutput(
+              "Terminal restored to normal size.",
+              "terminal-blue",
+            );
             isMinimized = false;
           }
           this.scrollToBottom();
         });
       }
-      
+
       // Maximize button (green) - toggles fullscreen mode
       let isMaximized = false;
-      const maximizeBtn = document.getElementById('maximize-btn');
+      const maximizeBtn = document.getElementById("maximize-btn");
       if (maximizeBtn) {
-        maximizeBtn.addEventListener('click', () => {
+        maximizeBtn.addEventListener("click", () => {
           if (!isMaximized) {
             // Expand left and right with negative margins + increase height
             if (terminal) {
-              terminal.style.marginLeft = '-6rem';
-              terminal.style.marginRight = '-6rem';
-              terminal.style.width = 'calc(100% + 12rem)';
+              terminal.style.marginLeft = "-6rem";
+              terminal.style.marginRight = "-6rem";
+              terminal.style.width = "calc(100% + 12rem)";
             }
             if (terminalBody) {
-              terminalBody.style.height = '70vh';
+              terminalBody.style.height = "70vh";
             }
-            
-            this.addOutput('🟢 Terminal maximized in all directions.', 'terminal-green');
+
+            this.addOutput(
+              "Terminal maximized in all directions.",
+              "terminal-green",
+            );
             isMaximized = true;
           } else {
             // Restore to original size
             if (terminal) {
-              terminal.style.marginLeft = '';
-              terminal.style.marginRight = '';
-              terminal.style.width = '';
+              terminal.style.marginLeft = "";
+              terminal.style.marginRight = "";
+              terminal.style.width = "";
             }
             if (terminalBody) {
-              terminalBody.style.height = '';
+              terminalBody.style.height = "";
             }
-            this.addOutput('🟢 Terminal restored to normal size.', 'terminal-blue');
+            this.addOutput(
+              "Terminal restored to normal size.",
+              "terminal-blue",
+            );
             isMaximized = false;
           }
           this.scrollToBottom();
         });
       }
     }
-    
+
     setupFontControls() {
-      const terminalBody = document.querySelector('.bg-terminal-bg\\/40');
+      const terminalBody = document.getElementById("terminal-body");
       let currentFontSize = 14; // Default font size in pixels
-      
+
       // Font size decrease button
-      const fontSmallerBtn = document.getElementById('font-smaller');
+      const fontSmallerBtn = document.getElementById("font-smaller");
       if (fontSmallerBtn) {
-        fontSmallerBtn.addEventListener('click', () => {
-          if (currentFontSize > 10) { // Minimum font size
+        fontSmallerBtn.addEventListener("click", () => {
+          if (currentFontSize > 10) {
+            // Minimum font size
             currentFontSize -= 2;
             if (terminalBody) {
-              terminalBody.style.fontSize = currentFontSize + 'px';
+              terminalBody.style.fontSize = currentFontSize + "px";
             }
-            this.addOutput(`🔤 Font size decreased to ${currentFontSize}px`, 'terminal-blue');
+            this.addOutput(
+              `Font size decreased to ${currentFontSize}px`,
+              "terminal-blue",
+            );
             this.scrollToBottom();
           } else {
-            this.addOutput('🔤 Font size is already at minimum (10px)', 'terminal-orange');
+            this.addOutput(
+              "Font size is already at minimum (10px)",
+              "terminal-orange",
+            );
             this.scrollToBottom();
           }
         });
       }
-      
+
       // Font size increase button
-      const fontBiggerBtn = document.getElementById('font-bigger');
+      const fontBiggerBtn = document.getElementById("font-bigger");
       if (fontBiggerBtn) {
-        fontBiggerBtn.addEventListener('click', () => {
-          if (currentFontSize < 24) { // Maximum font size
+        fontBiggerBtn.addEventListener("click", () => {
+          if (currentFontSize < 24) {
+            // Maximum font size
             currentFontSize += 2;
             if (terminalBody) {
-              terminalBody.style.fontSize = currentFontSize + 'px';
+              terminalBody.style.fontSize = currentFontSize + "px";
             }
-            this.addOutput(`🔤 Font size increased to ${currentFontSize}px`, 'terminal-green');
+            this.addOutput(
+              `Font size increased to ${currentFontSize}px`,
+              "terminal-green",
+            );
             this.scrollToBottom();
           } else {
-            this.addOutput('🔤 Font size is already at maximum (24px)', 'terminal-orange');
+            this.addOutput(
+              "Font size is already at maximum (24px)",
+              "terminal-orange",
+            );
             this.scrollToBottom();
           }
         });
       }
     }
-    
+
     focusInput() {
       this.input.focus();
     }
-    
+
     executeQuickCommand(command) {
       this.input.value = command;
       this.processCommand();
     }
-    
+
     showSuggestions() {
       const input = this.input.value.toLowerCase().trim();
       if (!input) {
         this.hideSuggestions();
         return;
       }
-      
-      const matches = Object.keys(this.commands).filter(cmd => 
-        cmd.startsWith(input) && cmd !== input
+
+      const matches = Object.keys(this.commands).filter(
+        (cmd) => cmd.startsWith(input) && cmd !== input,
       );
-      
+
       if (matches.length === 0) {
         this.hideSuggestions();
         return;
       }
-      
-      this.suggestions.innerHTML = '';
-      matches.slice(0, 5).forEach(cmd => {
-        const div = document.createElement('div');
-        div.className = 'p-2 hover:bg-terminal-green/20 cursor-pointer text-terminal-gray text-sm';
+
+      this.suggestions.innerHTML = "";
+      matches.slice(0, 5).forEach((cmd) => {
+        const div = document.createElement("div");
+        div.className =
+          "p-2 hover:bg-terminal-green/20 cursor-pointer text-terminal-gray text-sm";
         div.textContent = cmd;
-        div.addEventListener('click', () => {
+        div.addEventListener("click", () => {
           this.input.value = cmd;
           this.hideSuggestions();
           this.processCommand();
         });
         this.suggestions.appendChild(div);
       });
-      
-      this.suggestions.classList.remove('hidden');
+
+      this.suggestions.classList.remove("hidden");
       this.showingSuggestions = true;
     }
-    
+
     hideSuggestions() {
-      this.suggestions.classList.add('hidden');
+      this.suggestions.classList.add("hidden");
       this.showingSuggestions = false;
     }
-    
+
     processCommand() {
       const command = this.input.value.trim();
       if (command) {
         this.addToHistory(command);
         this.executeCommand(command);
       }
-      this.input.value = '';
+      this.input.value = "";
       this.historyIndex = -1;
     }
-    
+
     addToHistory(command) {
       this.commandHistory.unshift(command);
       if (this.commandHistory.length > 50) {
         this.commandHistory.pop();
       }
     }
-    
+
     navigateHistory(direction) {
-      if (direction === -1 && this.historyIndex < this.commandHistory.length - 1) {
+      if (
+        direction === -1 &&
+        this.historyIndex < this.commandHistory.length - 1
+      ) {
         this.historyIndex++;
       } else if (direction === 1 && this.historyIndex > -1) {
         this.historyIndex--;
       }
-      
+
       if (this.historyIndex >= 0) {
         this.input.value = this.commandHistory[this.historyIndex];
       } else {
-        this.input.value = '';
+        this.input.value = "";
       }
     }
-    
+
     autoComplete() {
       const partial = this.input.value.toLowerCase();
-      const matches = Object.keys(this.commands).filter(cmd => cmd.startsWith(partial));
-      
+      const matches = Object.keys(this.commands).filter((cmd) =>
+        cmd.startsWith(partial),
+      );
+
       if (matches.length === 1) {
         this.input.value = matches[0];
       } else if (matches.length > 1) {
@@ -414,483 +609,591 @@
         // Briefly show all matches in a compact format
         const maxShow = 5;
         const displayMatches = matches.slice(0, maxShow);
-        const more = matches.length > maxShow ? ` (+${matches.length - maxShow} more)` : '';
-        this.input.placeholder = `Suggestions: ${displayMatches.join(', ')}${more}`;
-        
+        const more =
+          matches.length > maxShow
+            ? ` (+${matches.length - maxShow} more)`
+            : "";
+        this.input.placeholder = `Suggestions: ${displayMatches.join(", ")}${more}`;
+
         // Reset placeholder after a few seconds
         setTimeout(() => {
-          this.input.placeholder = 'Type a command or click suggestions above...';
+          this.input.placeholder =
+            "Type a command or click suggestions above...";
         }, 3000);
       }
     }
-    
+
     executeCommand(command) {
       // Add separator line before new command (except for first command)
-      if (this.content.children.length > 6) { // Skip separator for welcome message + buttons
+      if (this.content.children.length > 6) {
+        // Skip separator for welcome message + buttons
         this.addSeparator();
       }
-      
+
       // Show the command that was typed
-      this.addOutput('titus@consulting:~$ ' + command, 'terminal-green');
-      
-      const [cmd, ...args] = command.toLowerCase().split(' ');
-      
+      this.addOutput("titus-automation $ " + command, "terminal-green");
+
+      const [cmd, ...args] = command.toLowerCase().split(" ");
+
       if (this.commands[cmd]) {
         this.commands[cmd](args);
       } else {
-        this.addOutput('Command not found: ' + cmd + '. Type \'help\' for available commands.', 'terminal-orange');
+        this.addOutput(
+          "Command not found: " + cmd + ". Type 'help' for available commands.",
+          "terminal-orange",
+        );
       }
-      
+
       this.scrollToBottom();
     }
-    
-    addOutput(text, className = 'terminal-gray') {
-      const div = document.createElement('div');
-      div.className = `text-${className} mb-1`;
-      div.innerHTML = text;
-      this.content.appendChild(div);
+
+    addOutput(text, className = "terminal-gray") {
+      this.outputQueue.push({ type: "line", text, className });
+      this.processQueue();
     }
-    
+
     addSeparator() {
-      const separator = document.createElement('div');
-      separator.className = 'border-t border-terminal-green/20 my-3';
-      this.content.appendChild(separator);
+      this.outputQueue.push({ type: "separator" });
+      this.processQueue();
     }
-    
+
+    processQueue() {
+      if (this.queueRunning) return;
+      this.queueRunning = true;
+      this.drainQueue();
+    }
+
+    drainQueue() {
+      if (this.outputQueue.length === 0) {
+        this.queueRunning = false;
+        return;
+      }
+      const item = this.outputQueue.shift();
+      const el = document.createElement("div");
+
+      if (item.type === "separator") {
+        el.className = "border-t border-secondary/20 my-3";
+        this.content.appendChild(el);
+        this.content.scrollTop = this.content.scrollHeight;
+        setTimeout(() => this.drainQueue(), 60);
+        return;
+      }
+
+      el.className = `text-${item.className} mb-1`;
+      el.innerHTML = item.text;
+      el.style.opacity = "0";
+      this.content.appendChild(el);
+      this.content.scrollTop = this.content.scrollHeight;
+
+      // Pop in after a frame
+      requestAnimationFrame(() => {
+        el.style.transition = "opacity 0.12s ease";
+        el.style.opacity = "1";
+      });
+
+      // Wait before showing next line
+      const delay = item.text === "" ? 30 : 120;
+      setTimeout(() => this.drainQueue(), delay);
+    }
+
     scrollToBottom() {
       setTimeout(() => {
         this.content.scrollTop = this.content.scrollHeight;
       }, 100);
     }
-    
+
     // Command implementations
     showHelp() {
       this.addOutput('Available commands:', 'terminal-blue');
-      this.addOutput('  help          - Show this help message', 'terminal-gray');
-      this.addOutput('  whoami        - About me', 'terminal-gray');
-      this.addOutput('  whoistitus    - Personal background story', 'terminal-gray');
-      this.addOutput('  skills        - My technical skills', 'terminal-gray');
-      this.addOutput('  skills.json   - Skills in JSON format', 'terminal-gray');
-      this.addOutput('  experience    - Work history and roles', 'terminal-gray');
-      this.addOutput('  projects      - My projects and experience', 'terminal-gray');
-      this.addOutput('  blog          - TestBot Chronicles blog', 'terminal-gray');
-      this.addOutput('  contact       - Get in touch', 'terminal-gray');
-      this.addOutput('  ls            - List directory contents', 'terminal-gray');
-      this.addOutput('  git log       - My career timeline', 'terminal-gray');
-      this.addOutput('  npm test      - Testing frameworks I use', 'terminal-gray');
-      this.addOutput('  docker ps     - Running services/skills', 'terminal-gray');
-      this.addOutput('  ping status   - Availability for hire', 'terminal-gray');
-      this.addOutput('  hire-me       - Let\'s work together!', 'terminal-gray');
-      this.addOutput('  logo / ascii  - Show the awesome alpaca logo!', 'terminal-gray');
+      this.addOutput('  whoami        - Who is behind the terminal', 'terminal-gray');
+      this.addOutput('  whoistitus    - The full backstory', 'terminal-gray');
+      this.addOutput('  skills        - Technical expertise', 'terminal-gray');
+      this.addOutput('  skills.json   - Skills as structured data', 'terminal-gray');
+      this.addOutput('  projects      - Portfolio and builds', 'terminal-gray');
+      this.addOutput('  experience    - Career timeline', 'terminal-gray');
+      this.addOutput('  contact       - How to reach me', 'terminal-gray');
+      this.addOutput('  blog          - TestBot Chronicles', 'terminal-gray');
+      this.addOutput('  ls            - List directory', 'terminal-gray');
+      this.addOutput('  git log       - Commit history', 'terminal-gray');
+      this.addOutput('  npm test      - Run the test suite', 'terminal-gray');
+      this.addOutput('  docker ps     - Active services', 'terminal-gray');
+      this.addOutput('  ping status   - Availability check', 'terminal-gray');
+      this.addOutput('  hire-me       - Start a collaboration', 'terminal-gray');
+      this.addOutput('  logo / ascii  - The alpaca', 'terminal-gray');
       this.addOutput('  clear         - Clear terminal', 'terminal-gray');
-      this.addOutput('  exit          - Exit terminal', 'terminal-gray');
+      this.addOutput('  exit          - End session', 'terminal-gray');
       this.addOutput('', 'terminal-gray');
-      this.addOutput('[*] Try some easter eggs: sudo make-coffee, rm -rf /, hack nasa', 'terminal-purple');
+      this.addOutput('[*] Easter eggs exist. Try: sudo make-coffee', 'terminal-purple');
     }
-    
+
     showWhoami() {
-      this.addOutput('[>] Hi! I\'m Titus from Titus Consulting', 'terminal-blue');
-      this.addOutput('[+] Freelance QA Engineer and Tech enabler', 'terminal-gray');
-      this.addOutput('>> From startup founder to QA strategist - I bring a unique perspective', 'terminal-gray');
-      this.addOutput('>> I don\'t just write tests; I design quality systems that enable', 'terminal-gray');
-      this.addOutput('>> teams to move fast and ship confidently', 'terminal-gray');
-      this.addOutput('[*] Author of TestBot Chronicles blog', 'terminal-gray');
-      this.addOutput('>> Available for freelance projects', 'terminal-green');
-      this.addOutput('[*] Based in Belgium', 'terminal-gray');
+      this.addOutput('[>] Quentin Goossens @ Titus Consulting', 'terminal-blue');
+      this.addOutput('', 'terminal-gray');
+      this.addOutput('[+] Role: Tech Enabler & QA Architect', 'terminal-blue');
+      this.addOutput('[+] Base: Brussels, Belgium', 'terminal-gray');
+      this.addOutput('[+] Focus: Test automation, R&D, AI tooling', 'terminal-gray');
+      this.addOutput('', 'terminal-gray');
+      this.addOutput('Ex-startup founder turned testing craftsman.', 'terminal-gray');
+      this.addOutput('I design quality systems that let teams ship fast', 'terminal-gray');
+      this.addOutput('and ship confidently.', 'terminal-gray');
+      this.addOutput('', 'terminal-gray');
+      this.addOutput('[*] Currently building: Bento, Lume, Aegis', 'terminal-green');
+      this.addOutput('[*] Writing at: TestBot Chronicles', 'terminal-green');
+      this.addOutput('[*] Status: Available for projects', 'terminal-purple');
     }
-    
+
     showWhoIsTitus() {
-      this.addOutput('[>] Personal Background Story', 'terminal-blue');
+      this.addOutput('[>] The Backstory', 'terminal-blue');
       this.addOutput('', 'terminal-gray');
-      this.addOutput('I\'m Quentin, an ex startup founder. I started my career', 'terminal-gray');
-      this.addOutput('more than 10 years ago, doing manual automation testing', 'terminal-gray');
-      this.addOutput('and fell in love with the craft. Now, many years later,', 'terminal-gray');
-      this.addOutput('I\'m still passionate about bringing quality to tech', 'terminal-gray');
-      this.addOutput('projects with automation and research & development.', 'terminal-gray');
+      this.addOutput('Started 10+ years ago doing manual testing.', 'terminal-gray');
+      this.addOutput('Fell in love with automation and never looked back.', 'terminal-gray');
       this.addOutput('', 'terminal-gray');
-      this.addOutput('[*] From startup founder to testing craftsman', 'terminal-green');
-      this.addOutput('[*] 10+ years in the testing industry', 'terminal-green');
-      this.addOutput('[*] Driven by quality and innovation', 'terminal-green');
+      this.addOutput('Co-founded Shippr, a logistics startup.', 'terminal-blue');
+      this.addOutput('Learned firsthand what it means to build, break,', 'terminal-gray');
+      this.addOutput('and fix things under real production pressure.', 'terminal-gray');
+      this.addOutput('', 'terminal-gray');
+      this.addOutput('Now I take that founder mindset into every', 'terminal-gray');
+      this.addOutput('QA engagement. Testing is not a checkbox.', 'terminal-gray');
+      this.addOutput('It is an engineering discipline.', 'terminal-purple');
+      this.addOutput('', 'terminal-gray');
+      this.addOutput('[*] 10+ years in the industry', 'terminal-green');
+      this.addOutput('[*] 50+ projects delivered', 'terminal-green');
+      this.addOutput('[*] Still shipping code every day', 'terminal-green');
     }
-    
+
     showSkills() {
-      this.addOutput('[+] My Expertise:', 'terminal-blue');
+      this.addOutput('[>] Technical Expertise', 'terminal-blue');
       this.addOutput('', 'terminal-gray');
-      this.addOutput('Core Strengths:', 'terminal-orange');
-      this.addOutput('  ✓ End-to-end automation strategies that reduce risk', 'terminal-green');
-      this.addOutput('  ✓ CI/CD optimization for rapid, reliable deployments', 'terminal-green');
-      this.addOutput('  ✓ R&D methodologies that drive innovation', 'terminal-green');
+      this.addOutput('Test Automation:', 'terminal-orange');
+      this.addOutput('  + Playwright (primary framework)', 'terminal-green');
+      this.addOutput('  + Cypress, Selenium, Appium', 'terminal-green');
+      this.addOutput('  + Visual regression testing', 'terminal-green');
+      this.addOutput('  + API testing and contract testing', 'terminal-green');
       this.addOutput('', 'terminal-gray');
-      this.addOutput('Testing Frameworks:', 'terminal-orange');
-      this.addOutput('  ✓ End-to-End Playwright Automation', 'terminal-green');
-      this.addOutput('  ✓ AI-powered Testing Solutions', 'terminal-green');
-      this.addOutput('  ✓ Cross-platform test Frameworks', 'terminal-green');
+      this.addOutput('Languages:', 'terminal-orange');
+      this.addOutput('  + TypeScript / JavaScript', 'terminal-green');
+      this.addOutput('  + Python', 'terminal-green');
+      this.addOutput('  + Shell scripting', 'terminal-green');
       this.addOutput('', 'terminal-gray');
-      this.addOutput('Languages & Tech:', 'terminal-orange');
-      this.addOutput('  ✓ TypeScript/JavaScript Expertise', 'terminal-green');
-      this.addOutput('  ✓ Python Test Automation', 'terminal-green');
-      this.addOutput('  ✓ Angular & Astro Development', 'terminal-green');
+      this.addOutput('Infrastructure:', 'terminal-orange');
+      this.addOutput('  + CI/CD pipeline design (GitHub Actions, Jenkins)', 'terminal-green');
+      this.addOutput('  + Docker and container-based testing', 'terminal-green');
+      this.addOutput('  + Performance and load testing (JMeter, k6)', 'terminal-green');
       this.addOutput('', 'terminal-gray');
-      this.addOutput('DevOps & Performance:', 'terminal-orange');
-      this.addOutput('  ✓ CI/CD Pipeline Design', 'terminal-green');
-      this.addOutput('  ✓ Container-based Testing', 'terminal-green');
-      this.addOutput('  ✓ Cloud-native QA Solutions', 'terminal-green');
-      this.addOutput('  ✓ Load Testing with JMeter', 'terminal-green');
+      this.addOutput('Building With:', 'terminal-orange');
+      this.addOutput('  + React, Astro, Electron, Preact', 'terminal-green');
+      this.addOutput('  + PostgreSQL, SQLite, tRPC', 'terminal-green');
+      this.addOutput('  + OpenAI, Gemini, Claude Code', 'terminal-green');
     }
-    
+
     showSkillsJson() {
       const skills = {
-        "name": "Titus Consulting",
-        "role": "Automated Test Engineer",
-        "testing_frameworks": ["Playwright", "Cypress", "Selenium", "Jest"],
-        "languages": ["JavaScript", "TypeScript", "Python", "Java", "C#"],
-        "ci_cd": ["GitHub Actions", "Jenkins", "Docker", "Kubernetes"],
-        "specialties": ["API Testing", "Performance Testing", "Test Strategy", "BDD/TDD"],
-        "available_for_hire": true,
-        "contact": "contact@titusconsulting.be"
+        name: 'Quentin Goossens',
+        role: 'Tech Enabler & QA Architect',
+        testing: ['Playwright', 'Cypress', 'Selenium', 'JMeter', 'k6'],
+        languages: ['TypeScript', 'JavaScript', 'Python', 'Shell'],
+        frameworks: ['React', 'Astro', 'Electron', 'Preact'],
+        infra: ['GitHub Actions', 'Jenkins', 'Docker'],
+        ai: ['OpenAI', 'Gemini', 'Claude Code', 'MCP'],
+        projects: ['Bento', 'Praxis', 'Lume', 'Aegis'],
+        available: true,
+        contact: 'quentin@titusconsulting.be'
       };
-      
       this.addOutput(JSON.stringify(skills, null, 2), 'terminal-purple');
     }
-    
+
     showProjects() {
-      this.addOutput('📁 Recent Projects & Experience:', 'terminal-blue');
+      this.addOutput('[>] Engineering Portfolio', 'terminal-blue');
       this.addOutput('', 'terminal-gray');
-      this.addOutput('  * Test Automation Frameworks', 'terminal-orange');
-      this.addOutput('  Built end-to-end testing solutions using Playwright & Cypress', 'terminal-gray');
+      this.addOutput('[BENTO] Visual Test Automation Platform', 'terminal-orange');
+      this.addOutput('  Drag-and-drop Playwright test builder.', 'terminal-gray');
+      this.addOutput('  27 action handlers, bidirectional code generation.', 'terminal-gray');
+      this.addOutput('  Stack: TypeScript, React 19, tRPC, PostgreSQL, Turborepo', 'terminal-green');
+      this.addOutput('  Status: In development', 'terminal-purple');
       this.addOutput('', 'terminal-gray');
-      this.addOutput('  * CI/CD Pipeline Optimization', 'terminal-orange');
-      this.addOutput('  Integrated testing workflows with GitHub Actions & Jenkins', 'terminal-gray');
+      this.addOutput('[PRAXIS] Privacy-First Workflow Capture', 'terminal-orange');
+      this.addOutput('  Chrome extension for documenting workflows.', 'terminal-gray');
+      this.addOutput('  Auto-screenshots, annotations, destructive PII redaction.', 'terminal-gray');
+      this.addOutput('  Zero network requests. 654+ tests.', 'terminal-gray');
+      this.addOutput('  Stack: TypeScript, Preact, Fabric.js, Manifest V3', 'terminal-green');
+      this.addOutput('  github.com/Kan-Bull/Praxis', 'terminal-blue');
       this.addOutput('', 'terminal-gray');
-      this.addOutput('  * Performance & Load Testing', 'terminal-orange');
-      this.addOutput('  Designed performance testing strategies for web applications', 'terminal-gray');
+      this.addOutput('[LUME] AI-Powered Learning Platform', 'terminal-orange');
+      this.addOutput('  Desktop app that generates personalized lessons.', 'terminal-gray');
+      this.addOutput('  Dual-AI engine: GPT creates, Gemini critiques.', 'terminal-gray');
+      this.addOutput('  Stack: Electron, OpenAI, Gemini, SQLite, Monaco', 'terminal-green');
+      this.addOutput('  Status: In development', 'terminal-purple');
       this.addOutput('', 'terminal-gray');
-      this.addOutput('📝 TestBot Chronicles Blog', 'terminal-orange');
-      this.addOutput('  Sharing insights on testing, automation, and productivity', 'terminal-gray');
+      this.addOutput('[AEGIS] AI Development Framework', 'terminal-orange');
+      this.addOutput('  Structured development framework for Claude Code.', 'terminal-gray');
+      this.addOutput('  Adaptive complexity, 9 specialized agents, quality gates.', 'terminal-gray');
+      this.addOutput('  Stack: Shell, Claude Code, MCP, Playwright', 'terminal-green');
+      this.addOutput('  github.com/Kan-Bull/aegis', 'terminal-blue');
     }
-    
+
     showContact() {
-      this.addOutput('[>] Let\'s connect!', 'terminal-blue');
+      this.addOutput('[>] Contact', 'terminal-blue');
       this.addOutput('', 'terminal-gray');
-      this.addOutput('Email: quentin@titusconsulting.be', 'terminal-green');
-      this.addOutput('Website: titusconsulting.be', 'terminal-green');
-      this.addOutput('Blog: TestBot Chronicles', 'terminal-green');
+      this.addOutput('  Email:   quentin@titusconsulting.be', 'terminal-green');
+      this.addOutput('  Web:     titusconsulting.be', 'terminal-green');
+      this.addOutput('  Blog:    testbot-chronicles.hashnode.dev', 'terminal-green');
+      this.addOutput('  GitHub:  github.com/Kan-Bull', 'terminal-green');
       this.addOutput('', 'terminal-gray');
-      this.addOutput('[+] Available for:', 'terminal-orange');
-      this.addOutput('  • Test automation consulting', 'terminal-gray');
-      this.addOutput('  • CI/CD pipeline setup', 'terminal-gray');
-      this.addOutput('  • Quality assurance strategy', 'terminal-gray');
-      this.addOutput('  • Testing framework implementation', 'terminal-gray');
-      this.addOutput('  • R&D Innovation Leadership', 'terminal-gray');
-      this.addOutput('  • Digital Testing Transformation', 'terminal-gray');
+      this.addOutput('Open for:', 'terminal-orange');
+      this.addOutput('  + Test automation consulting', 'terminal-gray');
+      this.addOutput('  + CI/CD pipeline architecture', 'terminal-gray');
+      this.addOutput('  + QA strategy and team coaching', 'terminal-gray');
+      this.addOutput('  + Performance engineering', 'terminal-gray');
+      this.addOutput('  + R&D and AI tooling', 'terminal-gray');
     }
-    
+
     listDirectory() {
-      this.addOutput('total 42', 'terminal-gray');
-      this.addOutput('drwxr-xr-x  skills/', 'terminal-blue');
+      this.addOutput('total 6', 'terminal-gray');
       this.addOutput('drwxr-xr-x  projects/', 'terminal-blue');
+      this.addOutput('drwxr-xr-x  skills/', 'terminal-blue');
       this.addOutput('drwxr-xr-x  experience/', 'terminal-blue');
       this.addOutput('-rw-r--r--  README.md', 'terminal-gray');
       this.addOutput('-rw-r--r--  contact.txt', 'terminal-gray');
       this.addOutput('-rwxr-xr-x  hire-me.sh', 'terminal-green');
     }
-    
+
     catFile(args) {
       const file = args[0];
       if (file === 'README.md') {
         this.addOutput('# Titus Consulting', 'terminal-blue');
         this.addOutput('', 'terminal-gray');
-        this.addOutput('Automated Test Engineer specializing in quality assurance', 'terminal-gray');
-        this.addOutput('and testing automation frameworks.', 'terminal-gray');
+        this.addOutput('Tech Enabler & Testing Automation Engineer.', 'terminal-gray');
+        this.addOutput('Building quality systems that let teams ship confidently.', 'terminal-gray');
+        this.addOutput('', 'terminal-gray');
+        this.addOutput('## Active Projects', 'terminal-blue');
+        this.addOutput('  Bento, Praxis, Lume, Aegis', 'terminal-green');
       } else if (file === 'contact.txt') {
         this.showContact();
       } else {
         this.addOutput('cat: ' + file + ': No such file or directory', 'terminal-orange');
       }
     }
-    
+
     npmCommand(args) {
       if (args[0] === 'test') {
-        this.addOutput('> testbot-chronicles@1.0.0 test', 'terminal-gray');
-        this.addOutput('> jest --coverage', 'terminal-gray');
+        this.addOutput('> titus-consulting@2.0.0 test', 'terminal-gray');
+        this.addOutput('> playwright test --reporter=list', 'terminal-gray');
         this.addOutput('', 'terminal-gray');
-        this.addOutput('🧪 Testing frameworks I use:', 'terminal-blue');
-        this.addOutput('  ✓ Jest - Unit & Integration testing', 'terminal-green');
-        this.addOutput('  ✓ Playwright - E2E testing', 'terminal-green');
-        this.addOutput('  ✓ Cypress - Modern web testing', 'terminal-green');
-        this.addOutput('  ✓ Selenium - Cross-browser testing', 'terminal-green');
+        this.addOutput('[PASS] Core automation suite         (1.2s)', 'terminal-green');
+        this.addOutput('[PASS] API contract validation       (0.8s)', 'terminal-green');
+        this.addOutput('[PASS] Visual regression checks      (2.1s)', 'terminal-green');
+        this.addOutput('[PASS] Cross-browser compatibility   (3.4s)', 'terminal-green');
         this.addOutput('', 'terminal-gray');
-        this.addOutput('All tests passing! ✅', 'terminal-green');
+        this.addOutput('4 passed | 0 failed | 7.5s total', 'terminal-green');
       } else {
         this.addOutput('Unknown npm command: ' + args.join(' '), 'terminal-orange');
       }
     }
-    
+
     gitCommand(args) {
       if (args[0] === 'log') {
-        this.addOutput('commit a1b2c3d (HEAD -> main)', 'terminal-orange');
-        this.addOutput('Author: Titus <contact@titusconsulting.be>', 'terminal-gray');
-        this.addOutput('Date: 2024 - Present', 'terminal-gray');
-        this.addOutput('    feat: Freelance Automated Test Engineer', 'terminal-gray');
+        this.addOutput('commit f7a8228 (HEAD -> main)', 'terminal-orange');
+        this.addOutput('Author: Quentin Goossens <quentin@titusconsulting.be>', 'terminal-gray');
+        this.addOutput('Date:   2024 - Present', 'terminal-gray');
+        this.addOutput('    feat: building Bento, Lume, Aegis, Praxis', 'terminal-green');
         this.addOutput('', 'terminal-gray');
-        this.addOutput('commit e4f5g6h', 'terminal-orange');
-        this.addOutput('    feat: TestBot Chronicles blog launch', 'terminal-gray');
+        this.addOutput('commit 6516633', 'terminal-orange');
+        this.addOutput('Date:   2023', 'terminal-gray');
+        this.addOutput('    feat: launched TestBot Chronicles on Hashnode', 'terminal-gray');
         this.addOutput('', 'terminal-gray');
-        this.addOutput('commit i7j8k9l', 'terminal-orange');
-        this.addOutput('    feat: Advanced test automation expertise', 'terminal-gray');
+        this.addOutput('commit b526bdb', 'terminal-orange');
+        this.addOutput('Date:   2022', 'terminal-gray');
+        this.addOutput('    feat: freelance QA architect, full-time consulting', 'terminal-gray');
+        this.addOutput('', 'terminal-gray');
+        this.addOutput('commit 1ab017a', 'terminal-orange');
+        this.addOutput('Date:   2019', 'terminal-gray');
+        this.addOutput('    feat: co-founded Shippr logistics startup', 'terminal-gray');
+        this.addOutput('', 'terminal-gray');
+        this.addOutput('commit 2403239', 'terminal-orange');
+        this.addOutput('Date:   2014', 'terminal-gray');
+        this.addOutput('    init: first test automation role', 'terminal-gray');
       } else {
         this.addOutput('usage: git <command> [<args>]', 'terminal-gray');
         this.addOutput('Try: git log', 'terminal-blue');
       }
     }
-    
+
     dockerCommand(args) {
       if (args[0] === 'ps') {
-        this.addOutput('CONTAINER ID   IMAGE               STATUS', 'terminal-blue');
-        this.addOutput('abc123def456   playwright:latest   Up 2 years    ▶ e2e-testing', 'terminal-green');
-        this.addOutput('def456ghi789   cypress:latest      Up 2 years    ▶ web-testing', 'terminal-green');
-        this.addOutput('ghi789jkl012   jest:latest         Up 2 years    ▶ unit-testing', 'terminal-green');
-        this.addOutput('jkl012mno345   quality-assurance   Up 2 years    ▶ qa-expertise', 'terminal-green');
+        this.addOutput('CONTAINER ID   IMAGE                  STATUS         NAME', 'terminal-blue');
+        this.addOutput('a1b2c3d4e5f6   bento:latest           building       bento-studio', 'terminal-purple');
+        this.addOutput('f6e5d4c3b2a1   praxis:1.0.0           Up 6 months    praxis-capture', 'terminal-green');
+        this.addOutput('1a2b3c4d5e6f   lume:latest            building       lume-learning', 'terminal-purple');
+        this.addOutput('6f5e4d3c2b1a   aegis:4.3.0            Up 1 year      aegis-framework', 'terminal-green');
+        this.addOutput('b1c2d3e4f5a6   playwright:latest      Up 2 years     e2e-testing', 'terminal-green');
       } else {
         this.addOutput('usage: docker <command>', 'terminal-gray');
         this.addOutput('Try: docker ps', 'terminal-blue');
       }
     }
-    
+
     pingCommand(args) {
       if (args[0] === 'status' || args[0] === 'availability') {
         this.addOutput('PING availability.titusconsulting.be', 'terminal-gray');
         this.addOutput('64 bytes from freelance-status: icmp_seq=1 ttl=64 time=0.1ms', 'terminal-green');
         this.addOutput('64 bytes from availability: icmp_seq=2 ttl=64 time=0.1ms', 'terminal-green');
         this.addOutput('', 'terminal-gray');
-        this.addOutput('✅ STATUS: AVAILABLE FOR PROJECTS', 'terminal-green');
-        this.addOutput('📅 Response time: Usually within 24h', 'terminal-blue');
-        this.addOutput('>> Accepting: Test automation & QA consulting', 'terminal-blue');
+        this.addOutput('STATUS: AVAILABLE FOR PROJECTS', 'terminal-green');
+        this.addOutput('Response time: Usually within 24h', 'terminal-blue');
+        this.addOutput('Accepting: QA consulting, test automation, AI tooling', 'terminal-blue');
       } else {
         this.addOutput('usage: ping <target>', 'terminal-gray');
-        this.addOutput('Try: ping availability', 'terminal-blue');
+        this.addOutput('Try: ping status', 'terminal-blue');
       }
     }
-    
+
     sudoCommand(args) {
       const command = args.join(' ');
       if (command === 'make-coffee' || command === 'make coffee') {
-        this.addOutput('[sudo] password for titus: ', 'terminal-gray');
-        this.addOutput('☕ Error: Coffee machine not found in current directory', 'terminal-orange');
-        this.addOutput('☕ Suggestion: Try hiring me and I\'ll bring my own coffee! 😄', 'terminal-purple');
+        this.addOutput('[sudo] password for titus: ********', 'terminal-gray');
+        this.addOutput('Error: Coffee machine not found in current directory', 'terminal-orange');
+        this.addOutput('Suggestion: Hire me and I will bring my own coffee.', 'terminal-purple');
       } else if (command === 'hire-me' || command === 'hire me') {
         this.addOutput('[sudo] Executing hire-me with elevated privileges...', 'terminal-gray');
         this.hireMe();
       } else if (command.includes('rm -rf')) {
-        this.addOutput('Nice try! 😄 This is a safe environment.', 'terminal-purple');
-        this.addOutput('Even sudo can\'t delete my enthusiasm for testing!', 'terminal-green');
+        this.addOutput('Nice try. This is a safe environment.', 'terminal-purple');
+        this.addOutput('Even sudo cannot delete my enthusiasm for testing.', 'terminal-green');
       } else {
         this.addOutput('sudo: ' + command + ': command not found', 'terminal-orange');
         this.addOutput('Try: sudo make-coffee', 'terminal-blue');
       }
     }
-    
+
     hireMe() {
-      this.addOutput('[OK] HIRE-ME.SH EXECUTED SUCCESSFULLY!', 'terminal-green');
+      this.addOutput('[OK] hire-me.sh executed successfully', 'terminal-green');
       this.addOutput('', 'terminal-gray');
-      this.addOutput('[>>] Initializing awesome collaboration...', 'terminal-blue');
-      this.addOutput('[>] Contact: contact@titusconsulting.be', 'terminal-green');
-      this.addOutput('[+] Ready to improve your testing processes!', 'terminal-green');
-      this.addOutput('🎯 Specializing in test automation & quality assurance', 'terminal-blue');
+      this.addOutput('Initializing collaboration protocol...', 'terminal-blue');
       this.addOutput('', 'terminal-gray');
-      this.addOutput('⚡ Fast response time guaranteed!', 'terminal-purple');
+      this.addOutput('Contact: quentin@titusconsulting.be', 'terminal-green');
+      this.addOutput('Web:     titusconsulting.be', 'terminal-green');
+      this.addOutput('Blog:    testbot-chronicles.hashnode.dev', 'terminal-green');
+      this.addOutput('', 'terminal-gray');
+      this.addOutput('Specializing in test automation, QA strategy,', 'terminal-gray');
+      this.addOutput('and AI-powered development tooling.', 'terminal-gray');
+      this.addOutput('', 'terminal-gray');
+      this.addOutput('[*] Fast response time. Let us build something.', 'terminal-purple');
     }
-    
+
     showAbout() {
-      this.addOutput('📖 About TestBot Chronicles & Titus Consulting', 'terminal-blue');
+      this.addOutput('[>] About Titus Consulting', 'terminal-blue');
       this.addOutput('', 'terminal-gray');
-      this.addOutput('This interactive terminal showcases my passion for:', 'terminal-gray');
-      this.addOutput('• Quality software through intelligent testing', 'terminal-green');
-      this.addOutput('• Automation frameworks and CI/CD pipelines', 'terminal-green');
-      this.addOutput('• Sharing knowledge through TestBot Chronicles', 'terminal-green');
-      this.addOutput('• Creating innovative solutions for QA challenges', 'terminal-green');
+      this.addOutput('This terminal is a working piece of the portfolio.', 'terminal-gray');
+      this.addOutput('Built with Astro, Tailwind, and vanilla JS.', 'terminal-gray');
+      this.addOutput('', 'terminal-gray');
+      this.addOutput('What I care about:', 'terminal-orange');
+      this.addOutput('  + Quality as an engineering discipline, not a gate', 'terminal-green');
+      this.addOutput('  + Automation that teams actually trust', 'terminal-green');
+      this.addOutput('  + Shipping tools I would use myself', 'terminal-green');
+      this.addOutput('  + Sharing what I learn on TestBot Chronicles', 'terminal-green');
     }
-    
+
     showBlog() {
-      this.addOutput('[*] TestBot Chronicles - Now on Hashnode!', 'terminal-blue');
+      this.addOutput('[>] TestBot Chronicles', 'terminal-blue');
       this.addOutput('', 'terminal-gray');
-      this.addOutput('My blog has moved to a dedicated platform for better content delivery.', 'terminal-gray');
+      this.addOutput('Writing about testing, automation, AI tooling,', 'terminal-gray');
+      this.addOutput('and the craft of building quality software.', 'terminal-gray');
       this.addOutput('', 'terminal-gray');
-      this.addOutput('[>] Visit https://testbot-chronicles.hashnode.dev/', 'terminal-green');
+      this.addOutput('[*] testbot-chronicles.hashnode.dev', 'terminal-green');
       this.addOutput('', 'terminal-gray');
-      
-      // Add a redirect after a short delay
+      this.addOutput('Opening in a new tab...', 'terminal-blue');
       setTimeout(() => {
         window.open('https://testbot-chronicles.hashnode.dev/', '_blank');
       }, 2000);
-      
-      this.addOutput('>> Opening TestBot Chronicles on Hashnode in 2 seconds...', 'terminal-blue');
     }
-    
+
     showLogo() {
-      this.addOutput('', 'terminal-gray');
-      this.addOutput('⠀⠀⠀⠀⡾⣦⡀⠀⠀⡀⠀⣰⢷⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀', 'terminal-orange');
-      this.addOutput('⠀⠀⠀⣠⠗⠛⠽⠛⠋⠉⢳⡃⢨⢧⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀', 'terminal-orange');
-      this.addOutput('⠀⣰⠋⠁⠀⠀⠀⠀⠀⠀⠙⠛⢾⡈⡏⢧⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀', 'terminal-orange');
-      this.addOutput('⣼⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⢧⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀', 'terminal-orange');
-      this.addOutput('⠸⢦⡀⠀⠀⠀⠀⢀⠀⠀⠀⠀⠀⠀⠀⠀⢸⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀', 'terminal-orange');
-      this.addOutput('⠀⢈⠟⠓⠶⠞⠒⢻⣿⡏⢳⡀⠀⠀⠀⠀⢸⡆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀', 'terminal-orange');
-      this.addOutput('⡴⢉⠀⠀⠀⠀⠀⠈⠛⢁⣸⠇⠀⠀⠀⠀⢺⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀', 'terminal-gray');
-      this.addOutput('⢧⣸⡁⠀⠀⣀⠀⠀⣠⠾⠀⠀⠀⠀⠀⠀⣹⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀', 'terminal-gray');
-      this.addOutput('⠀⠉⠓⢲⠾⣍⣀⣀⡿⠃⠀⠀⠀⠀⠀⠀⢸⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀', 'terminal-gray');
-      this.addOutput('⠀⠀⠀⠀⣇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀', 'terminal-gray');
-      this.addOutput('⠀⠀⠀⠀⣏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀', 'terminal-gray');
-      this.addOutput('⠀⠀⠀⢀⡗⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡼⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀', 'terminal-gray');
-      this.addOutput('⠀⠀⠀⢸⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀', 'terminal-gray');
-      this.addOutput('⠀⠀⠀⣸⠂⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠺⠦⠤⠤⣤⣄⣀⣀⡀⠀⠀⠀⠀⠀', 'terminal-gray');
-      this.addOutput('⠀⠀⠀⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠉⠉⠳⣦⣄⠀⠀', 'terminal-gray');
-      this.addOutput('⠀⠀⢀⡷⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠻⣆⠀', 'terminal-gray');
-      this.addOutput('⠀⠀⣼⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⣆', 'terminal-gray');
-      this.addOutput('⠀⠀⣏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿', 'terminal-gray');
-      this.addOutput('⠀⠀⢹⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣼', 'terminal-gray');
-      this.addOutput('⠀⠀⠀⣏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡞', 'terminal-gray');
-      this.addOutput('⠀⠀⠀⠈⢷⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⡇', 'terminal-gray');
-      this.addOutput('⠀⠀⠀⠀⠈⢻⣦⣀⠀⣏⠀⠀⠀⠀⠀⠀⢸⡆⠀⠀⢠⡄⠀⠀⠀⠀⠀⢀⡿⠀', 'terminal-blue');
-      this.addOutput('⠀⠀⠀⠀⠀⠀⠻⡉⠙⢻⡆⠀⠀⠀⠀⠀⡾⠚⠓⣖⠛⣧⡀⠀⠀⠀⢀⡾⠁⠀', 'terminal-blue');
-      this.addOutput('⠀⠀⠀⠀⠀⠀⠀⠙⡇⢀⡿⣦⡀⠀⢀⡴⠃⠀⠀⠈⣷⢈⠷⡆⠀⣴⠛⠀⠀⠀', 'terminal-blue');
-      this.addOutput('⠀⠀⠀⠀⠀⠀⠀⠀⠛⠚⠀⢸⡇⣰⠏⠁⠀⠀⠀⠀⢉⠁⢸⠷⠼⠃⠀⠀⠀⠀', 'terminal-blue');
-      this.addOutput('', 'terminal-gray');
-      this.addOutput('            [ Titus the Testing Alpaca ]', 'terminal-green');
-      this.addOutput('               TestBot Chronicles', 'terminal-blue');
-      this.addOutput('           "Spitting out quality code!"', 'terminal-purple');
-      this.addOutput('', 'terminal-gray');
+      this.addOutput("", "terminal-gray");
+      this.addOutput("⠀⠀⠀⠀⡾⣦⡀⠀⠀⡀⠀⣰⢷⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀", "terminal-orange");
+      this.addOutput("⠀⠀⠀⣠⠗⠛⠽⠛⠋⠉⢳⡃⢨⢧⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀", "terminal-orange");
+      this.addOutput("⠀⣰⠋⠁⠀⠀⠀⠀⠀⠀⠙⠛⢾⡈⡏⢧⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀", "terminal-orange");
+      this.addOutput("⣼⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⢧⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀", "terminal-orange");
+      this.addOutput("⠸⢦⡀⠀⠀⠀⠀⢀⠀⠀⠀⠀⠀⠀⠀⠀⢸⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀", "terminal-orange");
+      this.addOutput("⠀⢈⠟⠓⠶⠞⠒⢻⣿⡏⢳⡀⠀⠀⠀⠀⢸⡆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀", "terminal-orange");
+      this.addOutput("⡴⢉⠀⠀⠀⠀⠀⠈⠛⢁⣸⠇⠀⠀⠀⠀⢺⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀", "terminal-gray");
+      this.addOutput("⢧⣸⡁⠀⠀⣀⠀⠀⣠⠾⠀⠀⠀⠀⠀⠀⣹⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀", "terminal-gray");
+      this.addOutput("⠀⠉⠓⢲⠾⣍⣀⣀⡿⠃⠀⠀⠀⠀⠀⠀⢸⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀", "terminal-gray");
+      this.addOutput("⠀⠀⠀⠀⣇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀", "terminal-gray");
+      this.addOutput("⠀⠀⠀⠀⣏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀", "terminal-gray");
+      this.addOutput("⠀⠀⠀⢀⡗⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡼⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀", "terminal-gray");
+      this.addOutput("⠀⠀⠀⢸⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀", "terminal-gray");
+      this.addOutput("⠀⠀⠀⣸⠂⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠺⠦⠤⠤⣤⣄⣀⣀⡀⠀⠀⠀⠀⠀", "terminal-gray");
+      this.addOutput("⠀⠀⠀⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠉⠉⠳⣦⣄⠀⠀", "terminal-gray");
+      this.addOutput("⠀⠀⢀⡷⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠻⣆⠀", "terminal-gray");
+      this.addOutput("⠀⠀⣼⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⣆", "terminal-gray");
+      this.addOutput("⠀⠀⣏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿", "terminal-gray");
+      this.addOutput("⠀⠀⢹⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣼", "terminal-gray");
+      this.addOutput("⠀⠀⠀⣏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡞", "terminal-gray");
+      this.addOutput("⠀⠀⠀⠈⢷⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⡇", "terminal-gray");
+      this.addOutput("⠀⠀⠀⠀⠈⢻⣦⣀⠀⣏⠀⠀⠀⠀⠀⠀⢸⡆⠀⠀⢠⡄⠀⠀⠀⠀⠀⢀⡿⠀", "terminal-blue");
+      this.addOutput("⠀⠀⠀⠀⠀⠀⠻⡉⠙⢻⡆⠀⠀⠀⠀⠀⡾⠚⠓⣖⠛⣧⡀⠀⠀⠀⢀⡾⠁⠀", "terminal-blue");
+      this.addOutput("⠀⠀⠀⠀⠀⠀⠀⠙⡇⢀⡿⣦⡀⠀⢀⡴⠃⠀⠀⠈⣷⢈⠷⡆⠀⣴⠛⠀⠀⠀", "terminal-blue");
+      this.addOutput("⠀⠀⠀⠀⠀⠀⠀⠀⠛⠚⠀⢸⡇⣰⠏⠁⠀⠀⠀⠀⢉⠁⢸⠷⠼⠃⠀⠀⠀⠀", "terminal-blue");
+      this.addOutput("", "terminal-gray");
+      this.addOutput(
+        "            [ Titus the Testing Alpaca ]",
+        "terminal-green",
+      );
+      this.addOutput("               TestBot Chronicles", "terminal-blue");
+      this.addOutput(
+        '           "Spitting out quality code!"',
+        "terminal-purple",
+      );
+      this.addOutput("", "terminal-gray");
     }
-    
+
     showExperience() {
-      this.addOutput('[+] EXPERIENCE HIGHLIGHTS', 'terminal-green');
+      this.addOutput('[>] Experience', 'terminal-blue');
       this.addOutput('', 'terminal-gray');
-      this.addOutput('[⚡] 10+ Years', 'terminal-blue');
-      this.addOutput('  * Professional experience in test automation and quality assurance', 'terminal-gray');
+      this.addOutput('2024 - Now    Building Bento, Lume, Praxis, Aegis', 'terminal-green');
+      this.addOutput('              Freelance QA Architect @ Titus Consulting', 'terminal-gray');
       this.addOutput('', 'terminal-gray');
-      this.addOutput('[🎯] 50+ Projects', 'terminal-blue');
-      this.addOutput('  * Successfully delivered with measurable quality improvements', 'terminal-gray');
-      this.addOutput('  * Across multiple industries and technology stacks', 'terminal-gray');
+      this.addOutput('2022 - 2024   Senior QA Engineer, consulting missions', 'terminal-green');
+      this.addOutput('              Enterprise test automation at scale', 'terminal-gray');
       this.addOutput('', 'terminal-gray');
-      this.addOutput('[📚] Training & Mentorship', 'terminal-blue');
-      this.addOutput('  * Guided teams in adopting modern testing practices', 'terminal-gray');
-      this.addOutput('  * QA Team Development Programs', 'terminal-gray');
-      this.addOutput('  * Technical Mentoring & Coaching', 'terminal-gray');
+      this.addOutput('2019 - 2022   Co-founder @ Shippr', 'terminal-green');
+      this.addOutput('              Logistics startup, full-stack + QA', 'terminal-gray');
       this.addOutput('', 'terminal-gray');
-      this.addOutput('[🚀] Entrepreneurship', 'terminal-blue');
-      this.addOutput('  * Ex-founder leveraging business expertise', 'terminal-gray');
-      this.addOutput('  * Transform QA & R&D strategies', 'terminal-gray');
-      this.addOutput('  * Strategic Consulting & Innovation Leadership', 'terminal-gray');
+      this.addOutput('2014 - 2019   Test automation engineer', 'terminal-green');
+      this.addOutput('              Manual to automated, learned the craft', 'terminal-gray');
+      this.addOutput('', 'terminal-gray');
+      this.addOutput('[*] 50+ projects across fintech, logistics, SaaS, e-commerce', 'terminal-purple');
     }
-    
-    
+
     clearTerminal() {
       // Restore the original content (which has properly styled buttons)
       this.content.innerHTML = this.initialContent;
-      
+
       // Re-setup button listeners since we restored the original content
       this.setupButtonListeners();
-      
+
       // Add clear confirmation
-      this.addOutput('Terminal cleared. Type \'help\' for available commands.', 'terminal-blue');
+      this.addOutput(
+        "Terminal cleared. Type 'help' for available commands.",
+        "terminal-blue",
+      );
     }
-    
+
     exitTerminal() {
-      this.addOutput('👋 Thanks for visiting TestBot Chronicles!', 'terminal-green');
-      this.addOutput('💌 Don\'t forget to reach out: contact@titusconsulting.be', 'terminal-blue');
-      this.addOutput('>> Keep testing, keep automating!', 'terminal-purple');
-      this.addOutput('', 'terminal-gray');
-      this.addOutput('Terminal session ended.', 'terminal-gray');
+      this.addOutput(
+        "Thanks for visiting TestBot Chronicles!",
+        "terminal-green",
+      );
+      this.addOutput(
+        "Reach out: quentin@titusconsulting.be",
+        "terminal-blue",
+      );
+      this.addOutput("Keep testing, keep automating.", "terminal-purple");
+      this.addOutput("", "terminal-gray");
+      this.addOutput("Terminal session ended.", "terminal-gray");
       setTimeout(() => {
         this.input.disabled = true;
-        this.input.placeholder = 'Terminal session ended. Refresh to restart.';
+        this.input.placeholder = "Terminal session ended. Refresh to restart.";
       }, 1000);
     }
   }
-  
+
   // Initialize terminal when the page loads
   let terminalInstance;
-  document.addEventListener('DOMContentLoaded', () => {
+  document.addEventListener("DOMContentLoaded", () => {
     terminalInstance = new InteractiveTerminal();
     window.terminalInstance = terminalInstance; // Make globally accessible
   });
 </script>
 
-<style>
+<style is:global>
   #terminal-input {
-    caret-color: #39d353;
+    caret-color: transparent;
   }
-  
+
   #terminal-input:focus {
     outline: none;
   }
-  
-  .terminal-button {
-    background-color: rgba(57, 211, 83, 0.1);
-    border: 1px solid rgba(57, 211, 83, 0.3);
-    color: #39d353;
-    font-size: 0.625rem;
-    padding: 0.25rem 0.5rem;
-    border-radius: 0.375rem;
-    transition: all 0.2s;
-    font-family: monospace;
+
+  /* Block cursor effect */
+  #terminal-input:focus + .block-cursor,
+  .block-cursor {
+    display: inline-block;
+    width: 10px;
+    height: 1.2em;
+    background-color: #4cd7f6;
+    animation: block-blink 1s step-end infinite;
+    vertical-align: text-bottom;
+    margin-right: 6px;
+    flex-shrink: 0;
   }
-  
-  @media (min-width: 640px) {
-    .terminal-button {
-      font-size: 0.75rem;
-      padding: 0.375rem 0.75rem;
+
+  @keyframes block-blink {
+    0%,
+    50% {
+      opacity: 1;
+    }
+    51%,
+    100% {
+      opacity: 0;
     }
   }
-  
-  .terminal-button:hover {
-    background-color: rgba(57, 211, 83, 0.2);
-    border-color: rgba(57, 211, 83, 0.5);
-    transform: scale(1.05);
-    box-shadow: 0 10px 15px -3px rgba(57, 211, 83, 0.1);
+
+  /* Terminal output color classes used by JS */
+  .text-terminal-green {
+    color: #22c55e;
   }
-  
-  .text-terminal-green { color: #39d353; }
-  .text-terminal-blue { color: #58a6ff; }
-  .text-terminal-purple { color: #a371f7; }
-  .text-terminal-orange { color: #f78166; }
-  .text-terminal-gray { color: #8b949e; }
-  
+  .text-terminal-blue {
+    color: #4cd7f6;
+  }
+  .text-terminal-purple {
+    color: #fbabff;
+  }
+  .text-terminal-orange {
+    color: #fb923c;
+  }
+  .text-terminal-gray {
+    color: #c6c6cd;
+  }
+
   /* Custom scrollbar for terminal content */
   #terminal-content::-webkit-scrollbar {
-    width: 8px;
+    width: 6px;
   }
-  
+
   #terminal-content::-webkit-scrollbar-track {
-    background: rgba(139, 148, 158, 0.1);
+    background: rgba(76, 215, 246, 0.05);
     border-radius: 4px;
   }
-  
+
   #terminal-content::-webkit-scrollbar-thumb {
-    background: #39d353;
+    background: rgba(76, 215, 246, 0.3);
     border-radius: 4px;
-    opacity: 0.7;
   }
-  
+
   #terminal-content::-webkit-scrollbar-thumb:hover {
-    background: #2ebb47;
+    background: rgba(76, 215, 246, 0.5);
   }
-  
+
   /* Prominent attention-grabbing cursor blink */
   .cursor-blink {
     animation: cursor-blink 1s ease-in-out infinite;
-    filter: drop-shadow(0 0 5px #39d353);
+    filter: drop-shadow(0 0 5px #4cd7f6);
+    color: #4cd7f6;
   }
-  
+
   @keyframes cursor-blink {
-    0%, 40% { 
-      opacity: 1; 
-      transform: scale(1.2); 
-      filter: drop-shadow(0 0 8px #39d353);
+    0%,
+    40% {
+      opacity: 1;
+      transform: scale(1.2);
+      filter: drop-shadow(0 0 8px #4cd7f6);
     }
-    50%, 100% { 
-      opacity: 0.2; 
-      transform: scale(0.6); 
-      filter: drop-shadow(0 0 2px #39d353);
+    50%,
+    100% {
+      opacity: 0.2;
+      transform: scale(0.6);
+      filter: drop-shadow(0 0 2px #4cd7f6);
     }
   }
 </style>
